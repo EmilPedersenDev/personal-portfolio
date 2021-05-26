@@ -1,0 +1,15 @@
+@import "./colors.scss";
+@import "./base.scss";
+@import "./fonts.scss";
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $main-background;
+  font-family: "PT Sans", sans-serif;
+}
