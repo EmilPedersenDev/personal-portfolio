@@ -35,7 +35,7 @@ export default {
   mounted() {
     this.allSlides = [...this.$refs.slides.children];
 
-    this.startInterval();
+    // this.startInterval();
 
     this.allSlides.forEach((slide) => {
       slide.addEventListener("transitionstart", () => {
@@ -134,7 +134,7 @@ export default {
       });
     });
 
-    this.timer.clearInterval(this.timer);
+    this.cancelInterval();
   },
 };
 </script>
@@ -146,25 +146,24 @@ export default {
   background-repeat: no-repeat;
 }
 
-@mixin fullHeight {
-  width: 100%;
-  height: 100%;
-}
-
 .hero {
-  @include fullHeight;
+  @include fullHeightAndWidth;
   position: relative;
   .slides {
-    @include fullHeight;
+    @include fullHeightAndWidth;
     display: flex;
     .slide {
-      @include fullHeight;
+      @include fullHeightAndWidth;
       @include background-style;
-      width: 100%;
       flex: 0 0 0%;
       transition: all 1.3s ease;
+      opacity: 0;
+      visibility: hidden;
       &.active {
+        @include fullHeightAndWidth;
         flex: 1 1 100%;
+        opacity: 1;
+        visibility: visible;
       }
 
       &.slide__home {
