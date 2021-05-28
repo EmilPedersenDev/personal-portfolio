@@ -1,26 +1,26 @@
 <template>
   <div :class="['hero', showLandingPage && 'mounted']">
-    <div ref="slides" class="slides">
-      <div
-        ref="slideHome"
-        :class="['slide', 'slide__home', showLandingPage && 'active']"
-        data-index="0"
-      >
-        <h1>Emil</h1>
-        <p>Pedersen</p>
+    <full-page ref="fullpage" :options="options" id="fullpage">
+      <div class="section" id="about">
+        <div class="section-info">
+          <p>Well, Hello There!</p>
+          <h2>I'm</h2>
+          <h1>
+            Emil <br />
+            Pedersen
+          </h1>
+          <h2>[&nbsp;Web Developer&nbsp;]</h2>
+          <div class="section-info__lines"></div>
+        </div>
       </div>
-      <div ref="slideAbout" class="slide slide__about" data-index="1"></div>
-    </div>
-    <div ref="slideAction" class="slide-action">
-      <div class="slide-circle active" @click="setImageIndex(0)"></div>
-      <div class="slide-circle" @click="setImageIndex(1)"></div>
-    </div>
+      <div class="section" id="projects"><h1>Projects</h1></div>
+      <div class="section" id="resume"><h1>Resume</h1></div>
+    </full-page>
   </div>
 </template>
 
 <script>
 export default {
-  name: "e-hero-banner",
   props: {
     showLandingPage: {
       type: Boolean,
@@ -29,121 +29,54 @@ export default {
   },
   data() {
     return {
-      currentIndex: 0,
-      scrollTop: 0,
-      allSlides: undefined,
-      isSliderIdle: true,
-      timer: undefined,
+      options: {
+        licenseKey: "YOUR_KEY_HEERE",
+        menu: "#menu",
+        navigation: false,
+        sectionsColor: ["#b9b9b9", "#121212", "#b9b9b9"],
+        controlArrows: true,
+        scrollBar: false,
+        scrollingSpeed: 1200,
+        onLeave: this.onLeave,
+        afterLoad: this.afterLoad,
+        verticalCentered: false,
+      },
     };
   },
-
-  created() {
-    window.addEventListener("wheel", this.scrollDetector);
+  watch: {
+    showLandingPage(val) {
+      if (val) {
+        this.options.navigation = true;
+      }
+    },
   },
-
-  mounted() {
-    this.allSlides = [...this.$refs.slides.children];
-
-    // this.startInterval();
-
-    this.allSlides.forEach((slide) => {
-      slide.addEventListener("transitionstart", () => {
-        this.isSliderIdle = false;
-        this.cancelInterval();
-      });
-      slide.addEventListener("transitionend", () => {
-        this.isSliderIdle = true;
-        this.startInterval();
-      });
-    });
-  },
-
   methods: {
-    previous() {
-      if (this.currentIndex === 0) {
-        this.currentIndex = this.numberOfSlides - 1;
+    onLeave(origin, destination, direction) {
+      const section = destination.item;
+      let tl = new TimelineMax({ delay: 0.5 });
+
+      if (destination.index === 0) {
+        const sectionInfo = section.querySelector(".section-info");
+        tl.fromTo(
+          sectionInfo,
+          0.7,
+          { x: "-30%", y: "-10%", opacity: 0 },
+          { x: "-30%", y: "-40%", opacity: 1 }
+        );
+        console.log(about);
       } else {
-        --this.currentIndex;
-      }
-      this.setImageIndex();
-    },
-
-    next() {
-      if (this.currentIndex === this.numberOfSlides - 1) {
-        this.currentIndex = 0;
-      } else {
-        ++this.currentIndex;
-      }
-      this.setImageIndex();
-    },
-
-    setImageIndex(elIndex) {
-      this.currentIndex =
-        typeof elIndex !== "undefined" ? elIndex : this.currentIndex;
-
-      let allSlideActions = this.$refs.slideAction.children;
-
-      [...allSlideActions].map((el, i) => {
-        if (this.currentIndex === i) {
-          el.classList.add("active");
-          return;
-        }
-        el.classList.remove("active");
-      });
-      this.imageToShow();
-    },
-
-    scrollDetector(e) {
-      if (!this.isSliderIdle) return;
-      if (e.deltaY > 0) {
-        this.previous();
-      } else {
-        this.next();
+        const title = section.querySelector("h1");
+        tl.fromTo(
+          title,
+          0.7,
+          { x: 0, y: 0, opacity: 0 },
+          { x: 0, y: 0, opacity: 1 }
+        );
       }
     },
-
-    imageToShow() {
-      [...this.allSlides].map((slide) => {
-        let slideIndex = slide?.dataset?.index;
-        if (parseInt(slideIndex) === this.currentIndex) {
-          slide.classList.add("active");
-          return;
-        }
-        slide.classList.remove("active");
-      });
+    afterLoad() {
+      console.log("loaded");
     },
-
-    startInterval() {
-      this.cancelInterval();
-      this.timer = setInterval(() => {
-        this.next();
-      }, 5000);
-    },
-
-    cancelInterval() {
-      clearInterval(this.timer);
-    },
-  },
-
-  computed: {
-    numberOfSlides() {
-      return this.$refs.slides.childElementCount;
-    },
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("wheel", this.scrollDetector);
-
-    this.allSlides.forEach((slide) => {
-      slide.removeEventListener("transitionstart", (e) => {
-        this.isSliderIdle = false;
-      });
-      slide.removeEventListener("transitionend", (e) => {
-        this.isSliderIdle = true;
-      });
-    });
-
-    this.cancelInterval();
   },
 };
 </script>
@@ -165,74 +98,52 @@ export default {
     opacity: 1;
     visibility: visible;
   }
-  .slides {
-    @include fullHeightAndWidth;
-
-    .slide {
-      @include fullHeightAndWidth;
-      @include background-style;
-      position: absolute;
-      height: 100vh;
-      transition: all 1.3s ease;
-      opacity: 0;
-      visibility: hidden;
-      &.active {
-        @include fullHeightAndWidth;
-        opacity: 1;
-        visibility: visible;
-      }
-
-      &.slide__home {
-        background-image: url("../../assets/images/beach.jpg");
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  #fullpage {
+    .section {
+      position: relative;
+      .section-info {
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        transform: translate(-30%, -40%);
         h1,
-        p {
-          opacity: 0;
-          visibility: hidden;
-          transform: translateX(100px);
-          font-size: 62px;
-          transition: all 1.5s ease;
+        h2,
+        p,
+        span {
+          @include textOnDarkBkg;
         }
-        p {
-          transition-delay: 0.2s;
+        h1 {
+          font-size: 120px;
+          margin: 0;
+          line-height: 1;
         }
-        &.active {
-          h1,
-          p {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0px);
-          }
+        // letter-spacing: 0.1em;
+      }
+      &#about {
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 10px;
+          background: $main-background;
+          background-image: linear-gradient(
+            to bottom,
+            rgba(18, 18, 18, 0) 0% rgba(18, 18, 18, 1) 100%
+          );
+          box-shadow: 0px 0px 15px 10px $main-background,
+            0px 0px 15px 10px $main-background;
         }
       }
-      &.slide__about {
-        background-image: url("../../assets/images/space.jpg");
-      }
-    }
-  }
-  .slide-action {
-    position: absolute;
-    left: 95%;
-    bottom: 50%;
-    transform: translateY(-50%);
-    .slide-circle {
-      background-color: #000;
-      border-radius: 50%;
-      height: 7px;
-      width: 7px;
-      transition: all 0.3s ease;
-      &:not(:last-child) {
-        margin-bottom: 20px;
-      }
-      &:hover {
-        transform: scale(1.5);
-        cursor: pointer;
-      }
-      &.active {
-        transform: scale(1.8);
-        background: #aaa;
+
+      &#projects,
+      &#resume {
+        h1 {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%) !important;
+        }
       }
     }
   }

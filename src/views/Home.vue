@@ -44,17 +44,17 @@ export default {
 </script>
 <style lang="scss">
 .home {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  overflow-x: hidden;
+  // height: 100vh;
+  // width: 100%;
+  // position: relative;
+  // overflow-x: hidden;
   .container {
-    width: inherit;
-    height: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 1.3s ease;
+    // width: inherit;
+    // height: inherit;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // transition: all 1.3s ease;
     // overflow-y: hidden;
   }
 }
