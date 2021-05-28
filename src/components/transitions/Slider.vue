@@ -2,7 +2,7 @@
   <div class="e-slider">
     <div :class="classList"></div>
     <div :class="classList" id="second"></div>
-    <div :class="classList" id="third"></div>
+    <div ref="thirdSlider" :class="classList" id="third"></div>
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      isloaded: false,
+    };
+  },
+  mounted() {
+    this.$refs.thirdSlider.addEventListener("transitionend", () => {
+      this.$emit("loaded");
+    });
   },
   methods: {},
   computed: {
@@ -28,17 +38,15 @@ export default {
 
 <style lang="scss" scoped>
 .e-slider {
-  // height: 100%;
-  // width: 100%;
-  // position: relative;
   overflow-x: hidden;
   .e-slider__page {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     left: 100%;
     background: #c876ff;
     transition: all 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+    z-index: 30;
 
     &--is-active {
       left: -100%;
