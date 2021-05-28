@@ -3,13 +3,10 @@
     <full-page ref="fullpage" :options="options" id="fullpage">
       <div class="section" id="about">
         <div class="section-info">
-          <p>Well, Hello There!</p>
+          <h2>Well, Hello There!</h2>
           <h2>I'm</h2>
-          <h1>
-            Emil <br />
-            Pedersen
-          </h1>
-          <h2>[&nbsp;Web Developer&nbsp;]</h2>
+          <e-distortion text="EMIL"></e-distortion>
+          <h2 class="section-info__job-title">[&nbsp;Web Developer&nbsp;]</h2>
           <div class="section-info__lines"></div>
         </div>
       </div>
@@ -20,6 +17,7 @@
 </template>
 
 <script>
+import Distortion from "../distortion/Distortion.vue";
 export default {
   props: {
     showLandingPage: {
@@ -27,13 +25,16 @@ export default {
       default: false,
     },
   },
+  components: {
+    "e-distortion": Distortion,
+  },
   data() {
     return {
       options: {
         licenseKey: "YOUR_KEY_HEERE",
         menu: "#menu",
         navigation: false,
-        sectionsColor: ["#b9b9b9", "#121212", "#b9b9b9"],
+        sectionsColor: ["#121212", "#b9b9b9", "#121212"],
         controlArrows: true,
         scrollBar: false,
         scrollingSpeed: 1200,
@@ -53,15 +54,15 @@ export default {
   methods: {
     onLeave(origin, destination, direction) {
       const section = destination.item;
-      let tl = new TimelineMax({ delay: 0.5 });
+      let tl = new TimelineMax({ delay: 0.8 });
 
       if (destination.index === 0) {
         const sectionInfo = section.querySelector(".section-info");
         tl.fromTo(
           sectionInfo,
           0.7,
-          { x: "-30%", y: "-10%", opacity: 0 },
-          { x: "-30%", y: "-40%", opacity: 1 }
+          { x: "-20%", y: "-10%", opacity: 0 },
+          { x: "-20%", y: "-40%", opacity: 1 }
         );
         console.log(about);
       } else {
@@ -93,7 +94,7 @@ export default {
   position: relative;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 5.3s ease;
+  transition: opacity 2.3s ease;
   &.mounted {
     opacity: 1;
     visibility: visible;
@@ -104,20 +105,25 @@ export default {
       .section-info {
         position: absolute;
         top: 40%;
-        left: 30%;
-        transform: translate(-30%, -40%);
-        h1,
-        h2,
-        p,
-        span {
-          @include textOnDarkBkg;
-        }
+        left: 20%;
+        transform: translate(-20%, -40%);
+
         h1 {
           font-size: 120px;
           margin: 0;
           line-height: 1;
         }
-        // letter-spacing: 0.1em;
+        p {
+          padding-bottom: 20px;
+        }
+
+        h2 {
+          padding: 0px 35px;
+          &.section-info__job-title {
+            padding: 20px 30px;
+            text-align: right;
+          }
+        }
       }
       &#about {
         &::after {
@@ -126,13 +132,13 @@ export default {
           bottom: 0;
           width: 100%;
           height: 10px;
-          background: $main-background;
+          background: $gray-main-background;
           background-image: linear-gradient(
             to bottom,
-            rgba(18, 18, 18, 0) 0% rgba(18, 18, 18, 1) 100%
+            rgba(185, 185, 185, 0) 0% rgba(185, 185, 185, 1) 100%
           );
-          box-shadow: 0px 0px 15px 10px $main-background,
-            0px 0px 15px 10px $main-background;
+          box-shadow: 0px 0px 15px 10px $gray-main-background,
+            0px 0px 15px 10px $gray-main-background;
         }
       }
 
