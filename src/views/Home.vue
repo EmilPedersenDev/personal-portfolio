@@ -1,12 +1,15 @@
 <template>
   <div class="home">
     <e-spinner v-if="isLoading"></e-spinner>
-    <e-slider ref="slider" v-show="!isLoading" :isActive="isSliding"></e-slider>
-    <transition name="slide-fade">
-      <div class="container" v-show="!isLoading && showLandingPage">
-        <e-hero-banner></e-hero-banner>
-      </div>
-    </transition>
+    <e-slider
+      ref="slider"
+      v-show="!isLoading"
+      :isActive="isSliding"
+      v-on:loaded="showLandingPage = true"
+    ></e-slider>
+    <div class="container">
+      <e-hero-banner :showLandingPage="showLandingPage"></e-hero-banner>
+    </div>
   </div>
 </template>
 
@@ -25,16 +28,10 @@ export default {
     };
   },
   mounted() {
-    this.$refs.slider.$el.children[2].addEventListener("transitionend", (e) => {
-      this.showLandingPage = true;
-    });
-    document.addEventListener("scroll", (e) => {
-      console.log(e, "sdfs");
-    });
     setTimeout(() => {
       this.isLoading = false;
       this.activateSlider();
-    }, 2000);
+    }, 1000);
   },
   methods: {
     activateSlider() {
@@ -58,19 +55,7 @@ export default {
     justify-content: center;
     align-items: center;
     transition: all 1.3s ease;
+    // overflow-y: hidden;
   }
-}
-
-.slide-fade-enter-active {
-  // transition: all 2.8s ease;
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(300px);
-  opacity: 0;
 }
 </style>

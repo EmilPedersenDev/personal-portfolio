@@ -1,11 +1,14 @@
 <template>
-  <div class="hero">
+  <div :class="['hero', showLandingPage && 'mounted']">
     <div ref="slides" class="slides">
       <div
         ref="slideHome"
-        class="slide slide__home active"
+        :class="['slide', 'slide__home', showLandingPage && 'active']"
         data-index="0"
-      ></div>
+      >
+        <h1>Emil</h1>
+        <p>Pedersen</p>
+      </div>
       <div ref="slideAbout" class="slide slide__about" data-index="1"></div>
     </div>
     <div ref="slideAction" class="slide-action">
@@ -18,6 +21,12 @@
 <script>
 export default {
   name: "e-hero-banner",
+  props: {
+    showLandingPage: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       currentIndex: 0,
@@ -149,25 +158,54 @@ export default {
 .hero {
   @include fullHeightAndWidth;
   position: relative;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 5.3s ease;
+  &.mounted {
+    opacity: 1;
+    visibility: visible;
+  }
   .slides {
     @include fullHeightAndWidth;
-    display: flex;
+
     .slide {
       @include fullHeightAndWidth;
       @include background-style;
-      flex: 0 0 0%;
+      position: absolute;
+      height: 100vh;
       transition: all 1.3s ease;
       opacity: 0;
       visibility: hidden;
       &.active {
         @include fullHeightAndWidth;
-        flex: 1 1 100%;
         opacity: 1;
         visibility: visible;
       }
 
       &.slide__home {
         background-image: url("../../assets/images/beach.jpg");
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h1,
+        p {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateX(100px);
+          font-size: 62px;
+          transition: all 1.5s ease;
+        }
+        p {
+          transition-delay: 0.2s;
+        }
+        &.active {
+          h1,
+          p {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0px);
+          }
+        }
       }
       &.slide__about {
         background-image: url("../../assets/images/space.jpg");
