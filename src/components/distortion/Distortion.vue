@@ -30,18 +30,18 @@ export default {
     font-weight: 800;
     position: relative;
     font-size: 100px;
-    padding: 10px 30px;
+    padding: 0px;
   }
 
   .glitch::before,
   .glitch::after {
-    padding: 10px 30px;
+    padding: 0px;
     color: white;
     content: attr(data-text);
     position: absolute;
     width: 100%;
     height: 100%;
-    background: $main-background;
+    background: #000;
     overflow: hidden;
     top: 0;
   }
@@ -73,7 +73,7 @@ export default {
   $steps: 20;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(150) + px, 350px, random(150) + px, 30px);
+      clip: rect(random(150) + px, 350px, random(150) + px, 0px);
     }
   }
 }
@@ -82,7 +82,7 @@ export default {
   $steps: 20;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(150) + px, 350px, random(150) + px, 30px);
+      clip: rect(random(150) + px, 350px, random(150) + px, 0px);
     }
   }
 }
