@@ -28,7 +28,17 @@
           </li>
           <li>
             <router-link @click.native.prevent="toggleMenu" to="/resume"
+              >About</router-link
+            >
+          </li>
+          <li>
+            <router-link @click.native.prevent="toggleMenu" to="/resume"
               >Resume</router-link
+            >
+          </li>
+          <li>
+            <router-link @click.native.prevent="toggleMenu" to="/resume"
+              >Contact</router-link
             >
           </li>
         </ul>
