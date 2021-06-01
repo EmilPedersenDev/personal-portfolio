@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
-    <h1 class="glitch" :data-text="text">{{ text }}</h1>
+    <h1
+      :class="['glitch', isDistortionAnimating && 'animate']"
+      :data-text="text"
+    >
+      {{ text }}
+    </h1>
   </div>
 </template>
 
@@ -11,6 +16,10 @@ export default {
     text: {
       type: String,
       default: "",
+    },
+    isDistortionAnimating: {
+      type: Boolean,
+      default: false,
     },
   },
 };
@@ -31,6 +40,17 @@ export default {
     position: relative;
     font-size: 100px;
     padding: 0px;
+    transition: transform $animation-duration ease $animation-third-item-delay,
+      opacity $animation-duration ease-in $animation-third-item-delay,
+      visibility $animation-short-duration ease-in $animation-third-item-delay;
+    transform: translateY(400px);
+    opacity: 0;
+    visibility: hidden;
+    &.animate {
+      transform: translateY(0px);
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   .glitch::before,

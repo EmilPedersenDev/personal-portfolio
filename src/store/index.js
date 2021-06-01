@@ -7,7 +7,6 @@ export default new Vuex.Store({
   state: {
     isBlackNavbar: false,
   },
-  actions: {},
   mutations: {
     SET_BLACK_NAVBAR: (state, payload) => {
       state.isBlackNavbar = payload;
