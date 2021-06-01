@@ -14,7 +14,7 @@
       :class="['all-projects', isProjectAnimating && 'animate']"
       @click="$router.push('/projects')"
     >
-      <h1>View all projects</h1>
+      <h2>View all projects</h2>
       <img src="../../assets/icons/arrow-right.svg" alt="arrow right" />
     </div>
   </div>
@@ -185,7 +185,7 @@ export default {
       opacity: 1;
       visibility: visible;
     }
-    h1 {
+    h2 {
       margin-right: 10px;
       font-size: clamp(14px, 6vw, 32px);
       color: #000;

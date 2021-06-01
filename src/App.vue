@@ -21,4 +21,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
+
+#fp-nav {
+  span {
+    background: #000;
+  }
+  &.white {
+    span {
+      background: #fff;
+    }
+  }
+}
 </style>
