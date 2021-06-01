@@ -1,8 +1,18 @@
 <template>
   <div class="navigation">
     <div class="navigation__left">
-      <p>Emil Pedersen</p>
-      <span>|</span>
+      <img
+        class="navigation__logo"
+        v-if="!isBlackNavbar"
+        src="../../assets/images/ep-logo-white.png"
+        alt="logo white"
+      />
+      <img
+        class="navigation__logo"
+        v-else
+        src="../../assets/images/ep-logo-black.png"
+        alt="logo black"
+      />
     </div>
     <div class="navigation__right">
       <div
@@ -10,7 +20,10 @@
         class="navigation__icon-wrapper"
         @click="toggleMenu"
       >
-        <div class="navigation__hamburger"></div>
+        <div
+          class="navigation__hamburger"
+          :class="{ isBlackNavbar: isBlackNavbar }"
+        ></div>
       </div>
     </div>
     <div ref="menuOverlay" class="navigation-overlay">
@@ -48,12 +61,18 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "e-navigation",
   data() {
     return {
       isOpen: false,
     };
+  },
+  computed: {
+    ...mapGetters({
+      isBlackNavbar: "IS_BLACK_NAVBAR",
+    }),
   },
   methods: {
     toggleMenu() {
@@ -71,7 +90,6 @@ export default {
     },
     toggleMenuOverlay() {},
   },
-  computed: {},
 };
 </script>
 
@@ -89,8 +107,9 @@ export default {
   .navigation__left {
     display: flex;
     justify-content: space-between;
-    > p {
-      margin-right: 10px;
+    .navigation__logo {
+      width: 30px;
+      height: auto;
     }
   }
   .navigation__right {
@@ -112,26 +131,35 @@ export default {
           background: transparent;
           box-shadow: none;
           &::before {
+            background: #fff !important;
             transform: rotate(45deg) translate(35px, -35px);
           }
           &::after {
+            background: #fff !important;
             transform: rotate(-45deg) translate(35px, 35px);
           }
         }
       }
       .navigation__hamburger {
-        width: 40px;
-        height: 3px;
+        width: 20px;
+        height: 2px;
         border-radius: 5px;
         background: #fff;
         box-shadow: 0px 2px 5px rgba(255, 101, 47, 0.2);
         transition: all 0.3s ease;
+        &.isBlackNavbar {
+          background: #000;
+          &::before,
+          &::after {
+            background: #000;
+          }
+        }
         &::before,
         &::after {
           content: "";
           position: absolute;
-          width: 40px;
-          height: 3px;
+          width: 30px;
+          height: 2px;
           background: #fff;
           border-radius: 5px;
           transition: all 0.3s ease;
@@ -139,11 +167,11 @@ export default {
         }
 
         &::before {
-          transform: translateY(-16px);
+          transform: translateY(-12px);
         }
 
         &::after {
-          transform: translateY(16px);
+          transform: translateY(12px);
         }
       }
     }

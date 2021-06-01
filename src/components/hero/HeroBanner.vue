@@ -1,34 +1,54 @@
 <template>
   <div :class="['hero', showLandingPage && 'mounted']">
     <full-page ref="fullpage" :options="options" id="fullpage">
-      <div class="section" id="about" data-anchor="section1">
-        <div class="twinkling-stars"></div>
-        <div class="section-info">
-          <h2>Hello There!</h2>
-          <h2>I'm</h2>
-          <e-distortion text="EMIL"></e-distortion>
-          <h2 class="section-info__job-title">[&nbsp;Web Developer&nbsp;]</h2>
-          <div class="section-info__lines"></div>
-        </div>
-        <div class="section-links">
-          <div class="section-links__cta" @click="goToProjects">
-            <p>Projects</p>
-            <img src="../../assets/icons/arrow-down.svg" alt="arrow down" />
+      <e-about-summary
+        :goToProjects="goToProjects"
+        :goToAbout="goToAbout"
+        :isAboutAnimating="isAboutAnimating"
+      ></e-about-summary>
+      <e-project-summary
+        :isProjectAnimating="isProjectAnimating"
+      ></e-project-summary>
+      <div class="section" id="summary">
+        <div class="summary-wrapper">
+          <div class="summary__header">
+            <h1>Who am I</h1>
           </div>
-          <div class="section-links__cta" @click="goToAbout">
-            <p>About</p>
-            <img src="../../assets/icons/arrow-down.svg" alt="arrow down" />
+          <div class="summary__text">
+            <img
+              class="summary__gengar"
+              src="../../assets/images/gengar.svg"
+              alt="gengar"
+            />
+            <img src="../../assets/images/profil.jpg" alt="profil" />
+            <p>
+              "I am a developer who thrives on challenging myself and to become
+              better than I was yesterday".
+            </p>
+            <p class="interest">
+              "When I'm not coding, It's probably fishing, Pokemon card hunting
+              or being out in the wild that takes up my time".
+            </p>
+            <img
+              class="summary__fish"
+              src="../../assets/images/fish.png"
+              alt="fish"
+            />
+          </div>
+
+          <div class="summary__mountain">
+            <!-- <img src="../../assets/images/mountain.png" alt="" /> -->
           </div>
         </div>
       </div>
-      <div class="section" id="projects"><h1>Projects</h1></div>
-      <div class="section" id="resume"><h1>Resume</h1></div>
     </full-page>
   </div>
 </template>
 
 <script>
-import Distortion from "../distortion/Distortion.vue";
+import ProjectSummary from "../project-summary/ProjectSummary.vue";
+import AboutSummary from "../about-summary/AboutSummary.vue";
+import { mapMutations } from "vuex";
 export default {
   props: {
     showLandingPage: {
@@ -37,7 +57,8 @@ export default {
     },
   },
   components: {
-    "e-distortion": Distortion,
+    "e-about-summary": AboutSummary,
+    "e-project-summary": ProjectSummary,
   },
   data() {
     return {
@@ -53,37 +74,35 @@ export default {
         afterLoad: this.afterLoad,
         verticalCentered: false,
       },
+      isAboutAnimating: false,
+      isProjectAnimating: false,
     };
   },
   watch: {
     showLandingPage(val) {
       if (val) {
         this.options.navigation = true;
+        this.isAboutAnimating = true;
       }
     },
   },
+  computed: {},
   methods: {
+    ...mapMutations({
+      setBlackNavbar: "SET_BLACK_NAVBAR",
+    }),
     onLeave(origin, destination, direction) {
-      const section = destination.item;
-      let tl = new TimelineMax({ delay: 0.8 });
+      this.setBlackNavbar(false);
+      this.isAboutAnimating = false;
+      this.isProjectAnimating = false;
 
       if (destination.index === 0) {
-        const sectionInfo = section.querySelector(".section-info");
-        tl.fromTo(
-          sectionInfo,
-          0.7,
-          { x: "-20%", y: "-10%", opacity: 0 },
-          { x: "-20%", y: "-40%", opacity: 1 }
-        );
-        console.log(about);
+        this.isAboutAnimating = true;
+      } else if (destination.index === 1) {
+        this.setBlackNavbar(true);
+        this.isProjectAnimating = true;
       } else {
-        const title = section.querySelector("h1");
-        tl.fromTo(
-          title,
-          0.7,
-          { x: 0, y: 0, opacity: 0 },
-          { x: 0, y: 0, opacity: 1 }
-        );
+        this.setBlackNavbar(false);
       }
     },
     afterLoad() {
@@ -119,135 +138,113 @@ export default {
   #fullpage {
     .section {
       position: relative;
-
-      &#about {
-        background: $main-background
-          url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png)
-          repeat;
-        .section-info {
+      &#summary {
+        .summary-wrapper {
+          height: 80%;
+          width: 100%;
           position: absolute;
-          top: 40%;
-          left: 20%;
-          transform: translate(-20%, -40%);
+          bottom: 0;
+          left: 0;
+          .summary__header {
+            h1 {
+              font-size: 32px;
+              position: relative;
+              display: flex;
+              align-items: center;
+              line-height: 1.5;
+              letter-spacing: 3px;
+              font-weight: 200;
 
-          h1 {
-            font-size: 120px;
-            margin: 0;
-            line-height: 1;
-          }
-          p {
-            padding-bottom: 20px;
-          }
-
-          h2 {
-            &:first-child {
-              font-size: 30px;
-              margin-bottom: 10px;
-              transform: translateX(-30px);
-            }
-            &:nth-child(2) {
-              padding: 0px 5px;
-            }
-            &.section-info__job-title {
-              padding: 10px 0px;
-              text-align: right;
-            }
-          }
-        }
-
-        .section-links {
-          position: absolute;
-          top: 90%;
-          left: 50%;
-          transform: translate(-50%, -90%);
-          display: flex;
-          justify-content: space-between;
-          width: 150px;
-          @media (min-width: 576px) {
-            left: 90%;
-            transform: translate(-90%, -90%);
-          }
-          .section-links__cta {
-            text-align: center;
-            p {
-              transition: all 0.3s ease;
-              margin-bottom: 10px;
-            }
-            img {
-              animation: bounceUpDown 2s infinite;
-              width: 20px;
-              height: 20px;
-            }
-            &:hover {
-              cursor: pointer;
-              p {
-                transform: scale(1.2);
+              &::before {
+                content: "";
+                width: 80px;
+                background: #fff;
+                height: 1px;
+                margin-right: 10px;
               }
             }
           }
-        }
 
-        .twinkling-stars {
-          width: 10000px;
-          height: 100%;
-          position: absolute;
-          right: 0;
-          left: -9000px;
-          bottom: 0;
-          background: transparent
-            url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png")
-            repeat;
-          background-size: 1000px 1000px;
-          animation: stars 50s linear infinite;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 10px;
-          background: $gray-main-background;
-          background-image: linear-gradient(
-            to bottom,
-            rgba(185, 185, 185, 0) 0% rgba(185, 185, 185, 1) 100%
-          );
-          box-shadow: 0px 0px 15px 10px $gray-main-background,
-            0px 0px 15px 10px $gray-main-background;
-        }
-      }
+          .summary__text {
+            position: absolute;
+            @media (min-width: 768px) {
+              top: 40%;
+              left: 60%;
+              transform: translate(-60%, -40%);
+            }
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            p {
+              margin-top: 30px;
+              line-height: 1.5;
+              letter-spacing: 2px;
+              &.interest {
+                display: none;
+                @media (min-width: 768px) {
+                  display: block;
+                }
+              }
+            }
 
-      &#projects,
-      &#resume {
-        h1 {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%) !important;
+            img {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+            }
+            .summary__gengar {
+              position: absolute;
+              bottom: 50%;
+              right: 50%;
+              width: 200px;
+              height: 200px;
+              transform: translate(50%, 50%);
+              opacity: 0.03;
+              @media (min-width: 768px) {
+                bottom: -80%;
+                right: -100%;
+                transform: translate(-100%, -80%);
+              }
+            }
+            .summary__fish {
+              position: absolute;
+              top: -20%;
+              left: -30%;
+              width: 300px;
+              height: 300px;
+              transform: translate(-30%, -20%);
+              opacity: 0.05;
+              display: none;
+              @media (min-width: 768px) {
+                display: inline;
+              }
+            }
+          }
+
+          .summary__mountain {
+            width: 500px;
+            height: 200px;
+            position: absolute;
+            bottom: 0;
+            background-image: url(/img/mountain.e0026863.png);
+            background-position: -40px 52px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            @media (min-width: 768px) {
+              opacity: 1;
+            }
+          }
         }
       }
     }
-  }
-}
-
-@keyframes stars {
-  from {
-    transform: translate3d(0px, 0px, 0px);
-  }
-  to {
-    transform: translate3d(1000px, 0px, 0px);
-  }
-}
-
-@keyframes bounceUpDown {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-
-  100% {
-    transform: translateY(0px);
   }
 }
 </style>
