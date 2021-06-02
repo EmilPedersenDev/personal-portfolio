@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import allProjects from "../../services/models/projects.js";
 export default {
   name: "e-project-summary",
   props: {
@@ -31,29 +32,11 @@ export default {
   },
   data() {
     return {
-      projects: [
-        {
-          id: "1",
-          name: "Skånetrafiken",
-          img: require("../../assets/images/tag.jpg"),
-        },
-        {
-          id: "2",
-          name: "Oatly",
-          img: require("../../assets/images/oatly-milk.jpg"),
-        },
-        {
-          id: "3",
-          name: "Easter Game",
-          img: require("../../assets/images/Phaser.png"),
-        },
-        {
-          id: "4",
-          name: "Web Bureau",
-          img: require("../../assets/images/web-bureau-ex.png"),
-        },
-      ],
+      projects: [],
     };
+  },
+  mounted() {
+    this.projects = allProjects.filter((project) => project.id < 5);
   },
 };
 </script>

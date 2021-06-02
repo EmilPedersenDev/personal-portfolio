@@ -98,6 +98,7 @@ export default {
     },
     afterRender() {
       this.asideNav = document.getElementById("fp-nav");
+      if (!this.asideNav) return;
       this.asideNav.classList.add("white");
     },
     afterLoad() {
