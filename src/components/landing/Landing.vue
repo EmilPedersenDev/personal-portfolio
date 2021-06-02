@@ -126,7 +126,6 @@ export default {
     img {
       height: 30px;
       width: 30px;
-      opacity: 0.7;
       animation: bounceUpDown 2s infinite;
     }
   }
