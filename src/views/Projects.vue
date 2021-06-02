@@ -86,7 +86,11 @@ export default {
     .showcase-projects__card {
       position: relative;
       width: 100%;
-      height: 200px;
+      @media (min-width: 768px) {
+        height: 200px;
+      }
+      height: 250px;
+
       max-width: 600px;
       background: #1f1f1f;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
@@ -164,8 +168,11 @@ export default {
           flex: 3;
           line-height: 1.5;
           font-size: 13px;
-          max-width: 300px;
-          margin: 0 auto;
+          width: 100%;
+          padding: 0px 15px;
+          @media (min-width: 768px) {
+            max-width: 300px;
+          }
           position: absolute;
           top: 50%;
           left: 50%;
