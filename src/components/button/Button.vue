@@ -3,6 +3,8 @@
     class="e-button"
     @click="btnClick"
     :style="`min-width: ${minWidth}px`"
+    :type="type"
+    :disabled="disabled"
   >
     <img v-if="hasIcon" src="../../assets/icons/download.svg" alt="" />
     <span> {{ btnText }} </span>
@@ -24,6 +26,14 @@ export default {
     hasIcon: {
       type: Boolean,
       default: true,
+    },
+    type: {
+      type: String,
+      default: "button",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
@@ -56,10 +66,14 @@ export default {
     font-weight: 400;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     cursor: pointer;
     box-shadow: 0px 0px 15px 5px rgba(114, 50, 242, 0.4),
       0px 0px 15px 3px rgba(114, 50, 242, 0.4);
+  }
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.1);
   }
 }
 </style>

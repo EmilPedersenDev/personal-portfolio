@@ -13,6 +13,10 @@
         :isAboutAnimating="isAboutAnimating"
         :goToLanding="goToLanding"
       ></e-about>
+      <e-contact
+        :isContactAnimating="isContactAnimating"
+        :goToLanding="goToLanding"
+      ></e-contact>
     </full-page>
   </div>
 </template>
@@ -21,6 +25,7 @@
 import ProjectSummary from "../project-summary/ProjectSummary.vue";
 import Landing from "../landing/Landing.vue";
 import About from "../about/About.vue";
+import Contact from "../contact/Contact.vue";
 import { mapMutations, mapGetters } from "vuex";
 export default {
   props: {
@@ -33,6 +38,7 @@ export default {
     "e-landing": Landing,
     "e-project-summary": ProjectSummary,
     "e-about": About,
+    "e-contact": Contact,
   },
   data() {
     return {
@@ -40,7 +46,7 @@ export default {
         licenseKey: "YOUR_KEY_HEERE",
         menu: "#menu",
         navigation: false,
-        sectionsColor: ["#000", "#b9b9b9", "#121212"],
+        sectionsColor: ["#000", "#b9b9b9", "#121212", "#b9b9b9"],
         controlArrows: true,
         scrollBar: false,
         scrollingSpeed: 1200,
@@ -52,6 +58,7 @@ export default {
       isLandingAnimating: false,
       isProjectAnimating: false,
       isAboutAnimating: false,
+      isContactAnimating: false,
       asideNav: undefined,
     };
   },
@@ -85,15 +92,19 @@ export default {
       this.isLandingAnimating = false;
       this.isProjectAnimating = false;
       this.isAboutAnimating = false;
+      this.isContactAnimating = false;
 
       if (destination.index === 0) {
         this.isLandingAnimating = true;
       } else if (destination.index === 1) {
         this.setBlackNavbar(true);
         this.isProjectAnimating = true;
-      } else {
+      } else if (destination.index === 2) {
         this.isAboutAnimating = true;
         this.setBlackNavbar(false);
+      } else {
+        this.isContactAnimating = true;
+        this.setBlackNavbar(true);
       }
     },
     afterRender() {

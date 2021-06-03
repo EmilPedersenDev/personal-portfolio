@@ -5,8 +5,10 @@ import router from "./router";
 // import 'fullpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow:true
 // import "./fullpage.scrollHorizontally.min"; // Optional. When using fullpage extensions
 import VueFullPage from "vue-fullpage.js";
+import Vuelidate from "vuelidate";
 
 Vue.use(VueFullPage);
+Vue.use(Vuelidate);
 
 import "./components/index.js";
 import "./assets/styles/main.scss";

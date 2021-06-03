@@ -8,17 +8,17 @@
       v-on:loaded="showLandingPage = true"
     ></e-slider>
     <div class="container">
-      <e-hero-banner :showLandingPage="showLandingPage"></e-hero-banner>
+      <e-home-fullpage :showLandingPage="showLandingPage"></e-home-fullpage>
     </div>
   </div>
 </template>
 
 <script>
-import HeroBanner from "../components/hero/HeroBanner.vue";
+import HomeFullpage from "../components/hero/HomeFullpage.vue";
 export default {
   name: "Home",
   components: {
-    "e-hero-banner": HeroBanner,
+    "e-home-fullpage": HomeFullpage,
   },
   data() {
     return {
