@@ -10,7 +10,7 @@
       ></e-distortion>
       <h2>[Web Developer]</h2>
     </div>
-    <div class="section-link" @click="goToProjects">
+    <div class="section-link" @click="goToPage(2)">
       <img src="../../assets/icons/arrow-down.svg" alt="arrow down" />
     </div>
   </div>
@@ -24,10 +24,7 @@ export default {
     "e-distortion": Distortion,
   },
   props: {
-    goToProjects: {
-      type: Function,
-    },
-    goToAbout: {
+    goToPage: {
       type: Function,
     },
     isLandingAnimating: {

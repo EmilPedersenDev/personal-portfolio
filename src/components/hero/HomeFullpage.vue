@@ -2,8 +2,7 @@
   <div :class="['hero', showLandingPage && 'mounted']">
     <full-page ref="fullpage" :options="options" id="fullpage">
       <e-landing
-        :goToProjects="goToProjects"
-        :goToAbout="goToAbout"
+        :goToPage="goToPage"
         :isLandingAnimating="isLandingAnimating"
       ></e-landing>
       <e-project-summary
@@ -11,11 +10,11 @@
       ></e-project-summary>
       <e-about
         :isAboutAnimating="isAboutAnimating"
-        :goToLanding="goToLanding"
+        :goToPage="goToPage"
       ></e-about>
       <e-contact
         :isContactAnimating="isContactAnimating"
-        :goToLanding="goToLanding"
+        :goToPage="goToPage"
       ></e-contact>
     </full-page>
   </div>
@@ -115,14 +114,8 @@ export default {
     afterLoad() {
       // console.log("loaded");
     },
-    goToProjects() {
-      this.$refs.fullpage.api.moveTo(2);
-    },
-    goToAbout() {
-      this.$refs.fullpage.api.moveTo(3);
-    },
-    goToLanding() {
-      this.$refs.fullpage.api.moveTo(1);
+    goToPage(id) {
+      this.$refs.fullpage.api.moveTo(id);
     },
   },
 };
