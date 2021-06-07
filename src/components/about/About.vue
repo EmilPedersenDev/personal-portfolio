@@ -114,20 +114,31 @@ export default {
         line-height: 1.5;
         letter-spacing: 2px;
         &:first-of-type {
-          transition: transform $animation-duration ease $animation-delay;
+          transition: transform $animation-duration ease $animation-delay,
+            opacity $animation-duration ease-in $animation-delay,
+            visibility $animation-short-duration ease-in $animation-delay;
           transform: translateY(300px);
+          opacity: 0;
+          visibility: hidden;
         }
         &:last-of-type {
           display: none;
           @media (min-width: 768px) {
             display: block;
             transition: transform $animation-duration ease
-              $animation-second-item-delay;
+                $animation-second-item-delay,
+              opacity $animation-duration ease-in $animation-second-item-delay,
+              visibility $animation-short-duration ease-in
+                $animation-second-item-delay;
             transform: translateY(300px);
+            opacity: 0;
+            visibility: hidden;
           }
         }
         &.animate {
           transform: translateX(0px);
+          opacity: 1;
+          visibility: visible;
         }
       }
 

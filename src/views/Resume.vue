@@ -1,6 +1,6 @@
 <template>
   <div class="resume">
-    <div class="resume-wrapper">
+    <div :class="['resume-wrapper', isAnimating && '--is-animating']">
       <h1>Resume</h1>
       <a href="cv.pdf" download="cv.pdf">
         <e-button
@@ -17,8 +17,16 @@
 import { mapMutations } from "vuex";
 export default {
   name: "Resume",
+  data() {
+    return {
+      isAnimating: false,
+    };
+  },
   mounted() {
     this.setBlackNavbar(false);
+    setTimeout(() => {
+      this.isAnimating = true;
+    }, 1);
   },
   methods: {
     ...mapMutations({
@@ -34,13 +42,23 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
   .resume-wrapper {
+    transition: all $animation-duration ease $animation-delay;
+    transform: translateY(400px);
+    opacity: 0;
+    visibility: hidden;
     h1 {
       letter-spacing: 2px;
       font-weight: 200;
       font-size: 45px;
       text-align: center;
       margin-bottom: 30px;
+    }
+    &.--is-animating {
+      transform: translateY(0px);
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
