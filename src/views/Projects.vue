@@ -30,6 +30,8 @@
 <script>
 import allProjects from "../services/models/projects.js";
 import Observer from "../components/observer/Observer.vue";
+import { mapMutations } from "vuex";
+
 export default {
   components: {
     "e-observer": Observer,
@@ -44,9 +46,13 @@ export default {
     };
   },
   mounted() {
+    this.setBlackNavbar(false);
     this.renderedProjects = this.projects.filter((project) => project.id < 5);
   },
   methods: {
+    ...mapMutations({
+      setBlackNavbar: "SET_BLACK_NAVBAR",
+    }),
     loadProject() {
       if (this.currentIndex === this.numberOfProjects) {
         this.isDisconnected = true;

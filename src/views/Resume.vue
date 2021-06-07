@@ -14,8 +14,17 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "Resume",
+  mounted() {
+    this.setBlackNavbar(false);
+  },
+  methods: {
+    ...mapMutations({
+      setBlackNavbar: "SET_BLACK_NAVBAR",
+    }),
+  },
 };
 </script>
 
