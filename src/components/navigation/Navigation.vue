@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
     <div class="navigation__left">
-      <router-link to="/">
+      <router-link :to="{ path: '/', query: { page: 'home' } }">
         <img
           class="navigation__logo"
           v-if="!isBlackNavbar"
@@ -32,7 +32,9 @@
       <div class="navigation-overlay__wrapper">
         <ul>
           <li>
-            <router-link @click.native.prevent="toggleMenu" to="/"
+            <router-link
+              @click.native.prevent="toggleMenu"
+              :to="{ path: '/', query: { page: 'home' } }"
               >Home</router-link
             >
           </li>
@@ -42,7 +44,9 @@
             >
           </li>
           <li>
-            <router-link @click.native.prevent="toggleMenu" to="/"
+            <router-link
+              @click.native.prevent="toggleMenu"
+              :to="{ path: '/', query: { page: 'about' } }"
               >About</router-link
             >
           </li>
@@ -52,7 +56,9 @@
             >
           </li>
           <li>
-            <router-link @click.native.prevent="toggleMenu" to="/"
+            <router-link
+              @click.native.prevent="toggleMenu"
+              :to="{ path: '/', query: { page: 'contact' } }"
               >Contact</router-link
             >
           </li>

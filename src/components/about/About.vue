@@ -27,7 +27,7 @@
         />
       </div>
 
-      <div class="about__back-to-top" @click="goToLanding">
+      <div class="about__back-to-top" @click="goToPage(1)">
         <img src="../../assets/icons/arrow-down.svg" alt="back to top" />
         <p>Back to top</p>
       </div>
@@ -45,7 +45,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    goToLanding: {
+    goToPage: {
       type: Function,
     },
   },
