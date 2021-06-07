@@ -113,7 +113,7 @@ export default {
       this.asideNav.classList.add("white");
     },
     afterLoad() {
-      console.log("loaded");
+      // console.log("loaded");
     },
     goToProjects() {
       this.$refs.fullpage.api.moveTo(2);

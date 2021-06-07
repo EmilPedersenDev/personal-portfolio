@@ -1,18 +1,20 @@
 <template>
   <div class="navigation">
     <div class="navigation__left">
-      <img
-        class="navigation__logo"
-        v-if="!isBlackNavbar"
-        src="../../assets/images/ep-logo-white.png"
-        alt="logo white"
-      />
-      <img
-        class="navigation__logo"
-        v-else
-        src="../../assets/images/ep-logo-black.png"
-        alt="logo black"
-      />
+      <router-link to="/">
+        <img
+          class="navigation__logo"
+          v-if="!isBlackNavbar"
+          src="../../assets/images/ep-logo-white.png"
+          alt="logo white"
+        />
+        <img
+          class="navigation__logo"
+          v-else
+          src="../../assets/images/ep-logo-black.png"
+          alt="logo black"
+        />
+      </router-link>
     </div>
     <div class="navigation__right">
       <div
@@ -40,7 +42,7 @@
             >
           </li>
           <li>
-            <router-link @click.native.prevent="toggleMenu" to="/resume"
+            <router-link @click.native.prevent="toggleMenu" to="/"
               >About</router-link
             >
           </li>
@@ -50,7 +52,7 @@
             >
           </li>
           <li>
-            <router-link @click.native.prevent="toggleMenu" to="/resume"
+            <router-link @click.native.prevent="toggleMenu" to="/"
               >Contact</router-link
             >
           </li>
@@ -203,7 +205,7 @@ export default {
             position: relative;
             text-decoration: none;
             color: #fff;
-            font-size: 62px;
+            font-size: 42px;
             &::after {
               transition: all 0.3s ease-in-out;
               position: absolute;

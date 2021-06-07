@@ -62,6 +62,7 @@ export default {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
+    font-family: "PT Sans", sans-serif;
     background-color: hsla(0, 0%, 100%, 0.1);
     border: none;
     color: $white;

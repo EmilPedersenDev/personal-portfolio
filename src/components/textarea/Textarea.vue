@@ -70,6 +70,7 @@ export default {
     padding: 10px;
     border-radius: 8px;
     background-color: hsla(0, 0%, 100%, 0.1);
+    font-family: "PT Sans", sans-serif;
     border: none;
     color: $white;
     resize: none;

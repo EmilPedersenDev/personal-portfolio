@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <e-spinner v-if="isLoading"></e-spinner>
+    <e-spinner v-if="isLoading && fullPageRefresh"></e-spinner>
     <e-slider
       ref="slider"
-      v-show="!isLoading"
+      v-show="!isLoading && fullPageRefresh"
       :isActive="isSliding"
       v-on:loaded="showLandingPage = true"
     ></e-slider>
@@ -20,14 +20,27 @@ export default {
   components: {
     "e-home-fullpage": HomeFullpage,
   },
+  beforeRouteEnter(to, from, next) {
+    if (from.path !== "/") {
+      next((vm) => vm.setIsFullpageRefresh(false));
+    } else {
+      next((vm) => vm.setIsFullpageRefresh(true));
+    }
+  },
   data() {
     return {
       isLoading: true,
       isSliding: false,
       showLandingPage: false,
+      fullPageRefresh: false,
     };
   },
   mounted() {
+    if (!this.fullPageRefresh) {
+      this.isLoading = false;
+      this.showLandingPage = true;
+      return;
+    }
     setTimeout(() => {
       this.isLoading = false;
       this.activateSlider();
@@ -39,23 +52,10 @@ export default {
         this.isSliding = true;
       }, 200);
     },
+    setIsFullpageRefresh(bool) {
+      this.fullPageRefresh = bool;
+    },
   },
 };
 </script>
-<style lang="scss">
-.home {
-  // height: 100vh;
-  // width: 100%;
-  // position: relative;
-  // overflow-x: hidden;
-  .container {
-    // width: inherit;
-    // height: inherit;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // transition: all 1.3s ease;
-    // overflow-y: hidden;
-  }
-}
-</style>
+

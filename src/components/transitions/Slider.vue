@@ -28,7 +28,6 @@ export default {
   methods: {},
   computed: {
     classList() {
-      console.log(this.isActive);
       const rootClass = "e-slider__page";
       return [rootClass, this.isActive && `${rootClass}--is-active`];
     },
