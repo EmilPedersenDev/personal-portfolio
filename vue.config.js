@@ -5,9 +5,7 @@ module.exports = {
     loaderOptions: {
       sass: {
         prependData: `
-        @import "./src/assets/styles/colors.scss";
-        @import "./src/assets/styles/__mixins.scss";
-        @import "./src/assets/styles/__animation.scss";
+        @import "@/assets/styles/main.scss";
         `,
       },
     },

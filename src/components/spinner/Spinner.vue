@@ -65,7 +65,7 @@ $animation-duration: 2s;
       }
       &:nth-child(4n) {
         animation-direction: reverse;
-        animation-duration: calc(1.2 * $animation-duration);
+        animation-duration: calc(1.2 * #{$animation-duration});
       }
     }
   }
