@@ -118,6 +118,7 @@ export default {
     .navigation__logo {
       width: 30px;
       height: auto;
+      vertical-align: middle;
     }
   }
   .navigation__right {
@@ -127,7 +128,12 @@ export default {
       width: 80px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      @media (min-width: 768px) {
+        justify-content: center;
+        padding: 0;
+      }
 
       &:hover {
         cursor: pointer;

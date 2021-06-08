@@ -38,7 +38,10 @@ export default {
     font-family: sans-serif;
     font-weight: 800;
     position: relative;
-    font-size: 100px;
+    font-size: 80px;
+    @media (min-width: 768px) {
+      font-size: 100px;
+    }
     padding: 0px;
     transition: transform $animation-duration ease $animation-third-item-delay,
       opacity $animation-duration ease-in $animation-third-item-delay,

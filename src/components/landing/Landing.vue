@@ -58,7 +58,12 @@ export default {
         transition: transform $animation-duration ease $animation-delay,
           opacity $animation-duration ease-in $animation-delay,
           visibility $animation-short-duration ease-in $animation-delay;
-        transform: translate(-30px, 400px);
+        transform: translate(0px, 400px);
+        padding: 0px 5px;
+        @media (min-width: 768px) {
+          transform: translate(-30px, 400px);
+          padding: 0;
+        }
         opacity: 0;
         visibility: hidden;
       }
@@ -90,7 +95,10 @@ export default {
     &.animate {
       h2 {
         &:first-child {
-          transform: translate(-30px, 0px);
+          @media (min-width: 768px) {
+            transform: translate(-30px, 0px);
+          }
+          transform: translate(0px);
           opacity: 1;
           visibility: visible;
         }

@@ -35,14 +35,7 @@ $animation-duration: 2s;
     grid-column: 1;
     grid-row: 1;
     transform: scale(0.8);
-    background: linear-gradient(
-      90deg,
-      #fde6bd,
-      #a1c5ab,
-      #f4dd51,
-      #d11e48,
-      #632f53
-    );
+    background: linear-gradient(90deg, #7232f2, #c876ff, #20115b);
   }
   .e-spinner__wrapper {
     grid-column: 1;

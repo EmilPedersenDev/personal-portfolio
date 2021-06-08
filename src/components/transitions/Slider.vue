@@ -43,7 +43,7 @@ export default {
     width: 100%;
     height: 100vh;
     left: 100%;
-    background: #c876ff;
+    background: $purple;
     transition: all 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
     z-index: 30;
 
@@ -52,11 +52,11 @@ export default {
     }
 
     &#second {
-      background: #7232f2;
+      background: $purple-second;
       transition-delay: 0.2s;
     }
     &#third {
-      background: #20115b;
+      background: $purple-third;
       transition-delay: 0.3s;
     }
   }

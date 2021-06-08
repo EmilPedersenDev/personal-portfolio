@@ -87,7 +87,7 @@ export default {
       width: 100%;
       max-width: 600px;
       font-weight: 200;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
     .showcase-projects__card {
       position: relative;

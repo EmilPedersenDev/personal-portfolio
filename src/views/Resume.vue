@@ -49,7 +49,7 @@ export default {
     opacity: 0;
     visibility: hidden;
     h1 {
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       font-weight: 200;
       font-size: 45px;
       text-align: center;
