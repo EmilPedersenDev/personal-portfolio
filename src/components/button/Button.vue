@@ -8,6 +8,7 @@
   >
     <img v-if="hasIcon" src="../../assets/icons/download.svg" alt="" />
     <span> {{ btnText }} </span>
+    <e-spinner-simple v-if="isLoading" />
   </button>
 </template>
 
@@ -32,6 +33,10 @@ export default {
       default: "button",
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    isLoading: {
       type: Boolean,
       default: false,
     },

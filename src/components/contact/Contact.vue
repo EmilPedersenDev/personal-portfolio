@@ -2,83 +2,91 @@
   <div class="section" id="contact">
     <div class="contact-wrapper">
       <form @submit.prevent="submit" :class="{ animate: isContactAnimating }">
-        <h1>Contact</h1>
-        <e-input
-          type="text"
-          placeholder="Name"
-          v-model="model.name"
-          required
-          @blur="$v.model.name.$touch"
-          :invalid="$v.model.name.$dirty && $v.model.name.$invalid"
-        >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.name.$dirty && !$v.model.name.required"
-            >Name is required.</span
+        <div class="contact-form-action" v-if="!isEmailSent">
+          <h1>Contact</h1>
+          <e-input
+            type="text"
+            placeholder="Name"
+            v-model="model.name"
+            required
+            @blur="$v.model.name.$touch"
+            :invalid="$v.model.name.$dirty && $v.model.name.$invalid"
           >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.name.$dirty && !$v.model.name.alphaLetterValidation"
-            >Name must be alphabetic.</span
+            <span
+              slot="error"
+              class="input-error"
+              v-if="$v.model.name.$dirty && !$v.model.name.required"
+              >Name is required.</span
+            >
+            <span
+              slot="error"
+              class="input-error"
+              v-if="
+                $v.model.name.$dirty && !$v.model.name.alphaLetterValidation
+              "
+              >Name must be alphabetic.</span
+            >
+          </e-input>
+          <e-input
+            type="text"
+            placeholder="Email"
+            v-model="model.email"
+            required
+            @blur="$v.model.email.$touch"
+            :invalid="$v.model.email.$dirty && $v.model.email.$invalid"
           >
-        </e-input>
-        <e-input
-          type="text"
-          placeholder="Email"
-          v-model="model.email"
-          required
-          @blur="$v.model.email.$touch"
-          :invalid="$v.model.email.$dirty && $v.model.email.$invalid"
-        >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.email.$dirty && !$v.model.email.required"
-            >Not a valid Email.</span
+            <span
+              slot="error"
+              class="input-error"
+              v-if="$v.model.email.$dirty && !$v.model.email.required"
+              >Not a valid Email.</span
+            >
+            <span
+              slot="error"
+              class="input-error"
+              v-if="$v.model.email.$dirty && !$v.model.email.email"
+              >Not a valid Email.</span
+            >
+          </e-input>
+          <e-textarea
+            type="text"
+            placeholder="Message"
+            v-model="model.message"
+            @blur="$v.model.message.$touch"
+            :invalid="$v.model.message.$dirty && $v.model.message.$invalid"
           >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.email.$dirty && !$v.model.email.email"
-            >Not a valid Email.</span
+            <span
+              slot="error"
+              class="input-error"
+              v-if="$v.model.message.$dirty && !$v.model.message.required"
+              >Message is required.</span
+            >
+            <span
+              slot="error"
+              class="input-error"
+              v-if="$v.model.message.$dirty && !$v.model.message.minLength"
+              >Message must be at least 10 characters.</span
+            >
+            <span
+              slot="error"
+              class="input-error"
+              v-if="$v.model.message.$dirty && !$v.model.message.maxLength"
+              >Message cannot be longer than 1000 characters.</span
+            >
+          </e-textarea>
+          <e-button
+            type="submit"
+            btnText="Send Message"
+            minWidth="150"
+            :hasIcon="false"
+            :disabled="isDisabled"
+            :isLoading="isLoading"
+          />
+          <span class="required-definition"
+            ><span>*</span> Required fields</span
           >
-        </e-input>
-        <e-textarea
-          type="text"
-          placeholder="Message"
-          v-model="model.message"
-          @blur="$v.model.message.$touch"
-          :invalid="$v.model.message.$dirty && $v.model.message.$invalid"
-        >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.message.$dirty && !$v.model.message.required"
-            >Message is required.</span
-          >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.message.$dirty && !$v.model.message.minLength"
-            >Message must be at least 10 characters.</span
-          >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.message.$dirty && !$v.model.message.maxLength"
-            >Message cannot be longer than 1000 characters.</span
-          >
-        </e-textarea>
-        <e-button
-          type="submit"
-          btnText="Send Message"
-          minWidth="150"
-          :hasIcon="false"
-          :disabled="isDisabled"
-        />
-        <span class="required-definition"><span>*</span> Required fields</span>
+        </div>
+        <e-success v-show="isEmailSent" :isActive="isEmailSent" />
       </form>
       <div class="about__back-to-top" @click="goToPage(1)">
         <img src="../../assets/icons/arrow-down.svg" alt="back to top" />
@@ -96,10 +104,14 @@ import {
   maxLength,
 } from "vuelidate/lib/validators";
 import alphaLetterValidation from "../../services/validations.js";
+import Success from "./Success.vue";
 import axios from "axios";
 
 export default {
   name: "e-contact",
+  components: {
+    "e-success": Success,
+  },
   props: {
     isContactAnimating: {
       type: Boolean,
@@ -116,6 +128,8 @@ export default {
         message: "",
         email: "",
       },
+      isEmailSent: false,
+      isLoading: false,
     };
   },
   validations: {
@@ -144,11 +158,22 @@ export default {
           if (!value) return;
         }
 
+        this.isLoading = true;
+
         const { status } = await axios.post(
           `${process.env.VUE_APP_API_URL}/mail`,
           this.model
         );
+
+        if (status !== 200) {
+          this.isLoading = false;
+          throw new Error("Could not send the email.");
+        }
+
+        this.isEmailSent = true;
+        this.isLoading = false;
       } catch (err) {
+        this.isLoading = false;
         console.error(err);
       }
     },
