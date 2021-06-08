@@ -59,7 +59,13 @@ export default {
       isAboutAnimating: false,
       isContactAnimating: false,
       asideNav: undefined,
+      viewportInnerWidth: 0,
+      currentPageIndex: 0,
     };
+  },
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+    this.viewportInnerWidth = window.innerWidth;
   },
   watch: {
     showLandingPage(val) {
@@ -74,6 +80,17 @@ export default {
         return;
       }
       this.asideNav.classList.remove("white");
+    },
+    currentPageIndex(index) {
+      if (!this.asideNav) return;
+
+      this.asideNav.style.visibility = "visible";
+
+      if (index !== 3) return;
+
+      if (this.viewportInnerWidth > 768) return;
+
+      this.asideNav.style.visibility = "hidden";
     },
   },
   computed: {
@@ -92,6 +109,7 @@ export default {
       this.isProjectAnimating = false;
       this.isAboutAnimating = false;
       this.isContactAnimating = false;
+      this.currentPageIndex = destination.index;
 
       if (destination.index === 0) {
         this.isLandingAnimating = true;
@@ -106,16 +124,18 @@ export default {
         this.setBlackNavbar(true);
       }
     },
-    afterRender() {
+    afterRender(page) {
+      this.currentPageIndex = page.index;
       this.asideNav = document.getElementById("fp-nav");
       if (!this.asideNav) return;
       this.asideNav.classList.add("white");
     },
-    afterLoad() {
-      // console.log("loaded");
-    },
+    afterLoad() {},
     goToPage(id) {
       this.$refs.fullpage.api.moveTo(id);
+    },
+    onResize() {
+      this.viewportInnerWidth = window.innerWidth;
     },
   },
 };

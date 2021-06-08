@@ -170,7 +170,9 @@ export default {
   .contact-wrapper {
     height: 100%;
     width: 100%;
-    padding-top: 90px;
+    @media (min-width: 768px) {
+      padding-top: 90px;
+    }
     display: flex;
     align-items: center;
     justify-content: center;
@@ -220,6 +222,18 @@ export default {
         bottom: 5%;
         right: auto;
         transform: translateX(-50%);
+        background: $main-background;
+        opacity: 0.9;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 100;
+        img {
+          display: none;
+        }
+        p {
+          margin: 0 !important;
+          text-decoration: underline;
+        }
       }
       right: 5%;
       bottom: 5%;

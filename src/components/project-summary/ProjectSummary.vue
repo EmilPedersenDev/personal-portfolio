@@ -84,8 +84,12 @@ export default {
         background-size $animation-short-duration ease 0s;
       border-radius: 5px;
       background-repeat: no-repeat;
-      background-position: center center;
-      background-size: auto 100%;
+      background-position: center -10px;
+      background-size: 100% auto;
+      @media (min-width: 768px) {
+        background-position: center center;
+        background-size: auto 100%;
+      }
       position: relative;
       &:nth-child(odd),
       &:nth-child(even) {
