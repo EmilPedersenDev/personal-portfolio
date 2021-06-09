@@ -53,6 +53,8 @@ export default {
         afterLoad: this.afterLoad,
         verticalCentered: false,
         afterRender: this.afterRender,
+        scrollOverflow: false,
+        scrollOverflowReset: false,
       },
       isLandingAnimating: false,
       isProjectAnimating: false,
