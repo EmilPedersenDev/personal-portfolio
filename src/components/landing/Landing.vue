@@ -68,7 +68,10 @@ export default {
         visibility: hidden;
       }
       &:nth-child(2) {
-        padding: 0px 5px;
+        padding: 0px 5px 10px;
+        @media (min-width: 768px) {
+          padding: 0px 5px;
+        }
         transition: transform $animation-duration ease
             $animation-second-item-delay,
           opacity $animation-duration ease-in $animation-second-item-delay,
@@ -79,7 +82,10 @@ export default {
         visibility: hidden;
       }
       &:last-child {
-        padding: 10px 0px;
+        padding: 10px 5px;
+        @media (min-width: 768px) {
+          padding: 10px 0px;
+        }
         transition: transform $animation-duration ease
             $animation-fourth-item-delay,
           opacity $animation-duration ease-in $animation-fourth-item-delay,
@@ -103,7 +109,6 @@ export default {
           visibility: visible;
         }
         &:nth-child(2) {
-          padding: 0px 5px;
           transform: translateY(0px);
           opacity: 1;
           visibility: visible;
