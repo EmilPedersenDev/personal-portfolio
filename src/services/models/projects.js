@@ -48,7 +48,7 @@ const projects = [
     name: "DevQnect",
     fulltTitle: "Personal - DevQnect",
     description:
-      "An application with the purpose of showcasing your skills and experiance as a Software Developer",
+      "An application with the purpose of showcasing your skills and experience as a Software Developer",
     url: "https://emilpedersendev.github.io/search-developer-fe/#/",
     img: "",
   },
