@@ -252,7 +252,7 @@ export default {
         }
       }
       .brand-wrapper {
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         margin-top: 20px;
@@ -284,6 +284,9 @@ export default {
       .navigation-overlay__wrapper {
         ul {
           display: block;
+        }
+        .brand-wrapper {
+          display: flex;
         }
       }
     }
