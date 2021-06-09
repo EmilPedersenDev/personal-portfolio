@@ -99,9 +99,9 @@ export default {
         left: 60%;
         transform: translate(-60%, -40%);
       }
-      top: 50%;
+      top: 40%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -40%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -113,6 +113,7 @@ export default {
         margin-top: 30px;
         line-height: 1.5;
         letter-spacing: 2px;
+        font-size: clamp(12px, 1vw, 16px);
         &:first-of-type {
           transition: transform $animation-duration ease $animation-delay,
             opacity $animation-duration ease-in $animation-delay,
@@ -122,17 +123,17 @@ export default {
           visibility: hidden;
         }
         &:last-of-type {
-          display: none;
-          @media (min-width: 768px) {
-            display: block;
-            transition: transform $animation-duration ease
-                $animation-second-item-delay,
-              opacity $animation-duration ease-in $animation-second-item-delay,
-              visibility $animation-short-duration ease-in
-                $animation-second-item-delay;
-            transform: translateY(300px);
-            opacity: 0;
-            visibility: hidden;
+          display: block;
+          transition: transform $animation-duration ease
+              $animation-second-item-delay,
+            opacity $animation-duration ease-in $animation-second-item-delay,
+            visibility $animation-short-duration ease-in
+              $animation-second-item-delay;
+          transform: translateY(300px);
+          opacity: 0;
+          visibility: hidden;
+          @media (max-width: 768px) {
+            margin-top: 10px;
           }
         }
         &.animate {
