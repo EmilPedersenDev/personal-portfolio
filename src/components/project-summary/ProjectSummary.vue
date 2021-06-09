@@ -6,6 +6,7 @@
         v-for="(project, i) in projects"
         :key="i"
         :style="{ 'background-image': 'url(' + project.img + ')' }"
+        @click="goToLink(project.url)"
       >
         <p>{{ project.name }}</p>
       </div>
@@ -37,6 +38,11 @@ export default {
   },
   mounted() {
     this.projects = allProjects.filter((project) => project.id < 5);
+  },
+  methods: {
+    goToLink(url) {
+      window.open(url, "__blank");
+    },
   },
 };
 </script>
