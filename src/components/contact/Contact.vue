@@ -196,9 +196,9 @@ export default {
   .contact-wrapper {
     height: 100%;
     width: 100%;
-    @media (min-width: 768px) {
-      padding-top: 90px;
-    }
+    // @media (min-width: 768px) {
+    //   padding-top: 90px;
+    // }
     display: flex;
     align-items: center;
     justify-content: center;
