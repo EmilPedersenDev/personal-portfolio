@@ -3,7 +3,7 @@
     <div class="e-spinner__wrapper">
       <div
         class="e-spinner__particles"
-        v-for="(item, i) in particles"
+        v-for="(item, i) in numOfParticlesToShow"
         :key="i"
       ></div>
     </div>
@@ -15,8 +15,27 @@ export default {
   name: "e-spinner",
   data() {
     return {
-      particles: 9,
+      deviceWidth: 0,
     };
+  },
+  mounted() {
+    this.deviceWidth = window.innerWidth;
+
+    window.addEventListener("resize", this.onResize);
+  },
+  methods: {
+    onResize() {
+      this.deviceWidth = window.innerWidth;
+    },
+  },
+  computed: {
+    numOfParticlesToShow() {
+      if (this.deviceWidth > 768) return 9;
+      return 5;
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
 };
 </script>
@@ -34,7 +53,10 @@ $animation-duration: 2s;
     content: "";
     grid-column: 1;
     grid-row: 1;
-    transform: scale(0.8);
+    transform: scale(0.7);
+    @media (min-width: 768px) {
+      transform: scale(0.8);
+    }
     background: linear-gradient(90deg, #7232f2, #c876ff, #20115b);
   }
   .e-spinner__wrapper {

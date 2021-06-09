@@ -138,6 +138,9 @@ export default {
       this.viewportInnerWidth = window.innerWidth;
     },
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
 };
 </script>
 
