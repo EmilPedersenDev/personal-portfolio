@@ -82,6 +82,7 @@
             :disabled="isDisabled"
             :isLoading="isLoading"
           />
+          <e-error :error="error" v-if="Object.keys(error).length !== 0" />
           <span class="required-definition"
             ><span>*</span> Required fields</span
           >
@@ -130,6 +131,7 @@ export default {
       },
       isEmailSent: false,
       isLoading: false,
+      error: {},
     };
   },
   validations: {
@@ -157,7 +159,7 @@ export default {
         for (let value of Object.values(this.model)) {
           if (!value) return;
         }
-
+        this.error = {};
         this.isLoading = true;
 
         const { status } = await axios.post(
@@ -166,7 +168,6 @@ export default {
         );
 
         if (status !== 200) {
-          this.isLoading = false;
           throw new Error("Could not send the email.");
         }
 
@@ -174,7 +175,7 @@ export default {
         this.isLoading = false;
       } catch (err) {
         this.isLoading = false;
-        console.error(err);
+        this.error = err.response.data;
       }
     },
   },

@@ -63,7 +63,7 @@ export default {
     padding: 10px;
     border-radius: 8px;
     font-family: "PT Sans", sans-serif;
-    background-color: hsla(0, 0%, 100%, 0.1);
+    background-color: hsla(0, 0%, 100%, 0.1) !important;
     border: none;
     color: $white;
     transition: all $animation-short-duration ease;
@@ -74,6 +74,14 @@ export default {
     &::placeholder {
       color: $white;
     }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0 50px #3a3a3a inset;
+    border: none !important;
   }
   &--is-invalid {
     .e-input {
