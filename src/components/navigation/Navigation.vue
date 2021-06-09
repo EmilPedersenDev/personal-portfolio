@@ -63,6 +63,17 @@
             >
           </li>
         </ul>
+        <div class="brand-wrapper">
+          <a
+            href="https://www.linkedin.com/in/emil-pedersen-6320ab124/"
+            target="__blank"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/EmilPedersenDev" target="__blank">
+            <i class="fab fa-github-square"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -237,6 +248,30 @@ export default {
                 width: 100%;
               }
             }
+          }
+        }
+      }
+      .brand-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        .fab {
+          color: $white;
+          font-size: 30px;
+          transition: all $animation-short-duration ease;
+          &:hover {
+            cursor: pointer;
+            &.fa-linkedin {
+              color: #2867b2;
+            }
+            &.fa-github-square {
+              color: #c9510c;
+            }
+          }
+          &.fa-linkedin {
+            margin-right: 20px;
           }
         }
       }
