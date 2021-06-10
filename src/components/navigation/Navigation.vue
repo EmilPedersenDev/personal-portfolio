@@ -56,9 +56,7 @@
             >
           </li>
           <li>
-            <router-link
-              @click.native.prevent="toggleMenu"
-              :to="{ path: '/', query: { page: 'contact' } }"
+            <router-link @click.native.prevent="toggleMenu" to="/contact"
               >Contact</router-link
             >
           </li>
