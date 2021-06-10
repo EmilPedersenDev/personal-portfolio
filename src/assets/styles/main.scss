@@ -8,6 +8,19 @@ $font-family: "PT Sans", sans-serif;
 
 * {
   box-sizing: border-box;
+  &::-webkit-scrollbar {
+    width: 4px;
+    @media (min-width: 768px) {
+      width: 9px;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $main-background;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $purple;
+    border-radius: 6px;
+  }
 }
 
 body {

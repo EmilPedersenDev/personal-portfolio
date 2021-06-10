@@ -96,7 +96,7 @@ import {
 } from "vuelidate/lib/validators";
 import alphaLetterValidation from "../services/validations.js";
 import { mapMutations } from "vuex";
-import Success from "../components/contact/Success.vue";
+import Success from "../components/success/Success.vue";
 import axios from "axios";
 
 export default {

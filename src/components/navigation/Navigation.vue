@@ -96,16 +96,20 @@ export default {
       this.isOpen = !this.isOpen;
       let navBtn = this.$refs.navigationBtn;
       let navOverlay = this.$refs.menuOverlay;
+      let body = document.querySelector("body");
 
       if (this.isOpen) {
         navBtn.classList.add("open");
         navOverlay.classList.add("open");
+        body.style.overflowY = "hidden";
       } else {
         navBtn.classList.remove("open");
         navOverlay.classList.remove("open");
+        if (this.$route.path === "/projects") {
+          body.style.overflowY = "auto";
+        }
       }
     },
-    toggleMenuOverlay() {},
   },
 };
 </script>
