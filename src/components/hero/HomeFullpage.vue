@@ -12,10 +12,6 @@
         :isAboutAnimating="isAboutAnimating"
         :goToPage="goToPage"
       ></e-about>
-      <e-contact
-        :isContactAnimating="isContactAnimating"
-        :goToPage="goToPage"
-      ></e-contact>
     </full-page>
   </div>
 </template>
@@ -24,7 +20,6 @@
 import ProjectSummary from "../project-summary/ProjectSummary.vue";
 import Landing from "../landing/Landing.vue";
 import About from "../about/About.vue";
-import Contact from "../contact/Contact.vue";
 import { mapMutations, mapGetters } from "vuex";
 export default {
   props: {
@@ -37,15 +32,14 @@ export default {
     "e-landing": Landing,
     "e-project-summary": ProjectSummary,
     "e-about": About,
-    "e-contact": Contact,
   },
   data() {
     return {
       options: {
-        licenseKey: "YOUR_KEY_HEERE",
+        licenseKey: process.env.VUE_APP_LICENSE_KEY,
         menu: "#menu",
         navigation: false,
-        sectionsColor: ["#000", "#b9b9b9", "#121212", "#b9b9b9"],
+        sectionsColor: ["#000", "#b9b9b9", "#121212"],
         controlArrows: true,
         scrollBar: false,
         scrollingSpeed: 1200,
@@ -59,11 +53,12 @@ export default {
       isLandingAnimating: false,
       isProjectAnimating: false,
       isAboutAnimating: false,
-      isContactAnimating: false,
       asideNav: undefined,
     };
   },
-
+  mounted() {
+    this.setBlackNavbar(false);
+  },
   watch: {
     showLandingPage(val) {
       if (val) {
@@ -72,6 +67,7 @@ export default {
       }
     },
     isBlackNavbar(isBlack) {
+      if (!this.asideNav) return;
       if (!isBlack) {
         this.asideNav.classList.add("white");
         return;
@@ -94,7 +90,6 @@ export default {
       this.isLandingAnimating = false;
       this.isProjectAnimating = false;
       this.isAboutAnimating = false;
-      this.isContactAnimating = false;
       this.asideNav.style.visibility = "visible";
 
       if (destination.index === 0) {
@@ -102,15 +97,9 @@ export default {
       } else if (destination.index === 1) {
         this.setBlackNavbar(true);
         this.isProjectAnimating = true;
-      } else if (destination.index === 2) {
+      } else {
         this.isAboutAnimating = true;
         this.setBlackNavbar(false);
-      } else {
-        if (window.innerWidth < 768) {
-          this.asideNav.style.visibility = "hidden";
-        }
-        this.isContactAnimating = true;
-        this.setBlackNavbar(true);
       }
     },
     afterRender(page) {
