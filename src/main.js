@@ -6,9 +6,20 @@ import router from "./router";
 // import "./fullpage.scrollHorizontally.min"; // Optional. When using fullpage extensions
 import VueFullPage from "vue-fullpage.js";
 import Vuelidate from "vuelidate";
+import VueGtag from "vue-gtag";
 
 Vue.use(VueFullPage);
 Vue.use(Vuelidate);
+
+Vue.use(
+  VueGtag,
+  {
+    config: {
+      id: "UA-199745855-1",
+    },
+  },
+  router
+);
 
 import "./components/index.js";
 import "./assets/styles/main.scss";
