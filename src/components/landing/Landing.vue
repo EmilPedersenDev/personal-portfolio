@@ -46,45 +46,45 @@ export default {
     transform: translate(-20%, -40%);
 
     p {
-      padding-bottom: 20px;
+      padding-bottom: 1.25rem;
     }
 
     h2 {
-      letter-spacing: 3px;
+      letter-spacing: 0.1875rem;
       font-weight: 200;
       &:first-child {
-        font-size: 30px;
-        margin-bottom: 10px;
+        font-size: 1.875rem;
+        margin-bottom: 0.625rem;
         transition: transform $animation-duration ease $animation-delay,
           opacity $animation-duration ease-in $animation-delay,
           visibility $animation-short-duration ease-in $animation-delay;
-        transform: translate(0px, 400px);
-        padding: 0px 5px;
-        @media (min-width: 768px) {
-          transform: translate(-30px, 400px);
+        transform: translate(0, 25rem);
+        padding: 0 0.3125rem;
+        @include rw-respond-above(m) {
+          transform: translate(-1.875rem, 25rem);
           padding: 0;
         }
         opacity: 0;
         visibility: hidden;
       }
       &:nth-child(2) {
-        padding: 0px 5px 10px;
-        @media (min-width: 768px) {
-          padding: 0px 5px;
+        padding: 0 0.3125rem 0.625rem;
+        @include rw-respond-above(m) {
+          padding: 0 0.3125rem;
         }
         transition: transform $animation-duration ease
             $animation-second-item-delay,
           opacity $animation-duration ease-in $animation-second-item-delay,
           visibility $animation-short-duration ease-in
             $animation-second-item-delay;
-        transform: translateY(400px);
+        transform: translateY(25rem);
         opacity: 0;
         visibility: hidden;
       }
       &:last-child {
-        padding: 10px 5px;
-        @media (min-width: 768px) {
-          padding: 10px 0px;
+        padding: 0.625rem 0.3125rem;
+        @include rw-respond-above(m) {
+          padding: 0.625rem 0;
         }
         transition: transform $animation-duration ease
             $animation-fourth-item-delay,
@@ -92,7 +92,7 @@ export default {
           visibility $animation-short-duration ease-in
             $animation-fourth-item-delay;
         text-align: right;
-        transform: translateY(400px);
+        transform: translateY(25rem);
         opacity: 0;
         visibility: hidden;
       }
@@ -101,20 +101,20 @@ export default {
     &.animate {
       h2 {
         &:first-child {
-          @media (min-width: 768px) {
-            transform: translate(-30px, 0px);
+          @include rw-respond-above(m) {
+            transform: translate(-1.875rem, 0);
           }
-          transform: translate(0px);
+          transform: translate(0);
           opacity: 1;
           visibility: visible;
         }
         &:nth-child(2) {
-          transform: translateY(0px);
+          transform: translateY(0);
           opacity: 1;
           visibility: visible;
         }
         &:last-child {
-          transform: translateY(0px);
+          transform: translateY(0);
           opacity: 1;
           visibility: visible;
         }
@@ -127,15 +127,15 @@ export default {
     bottom: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     img {
-      height: 30px;
-      width: 30px;
+      height: 1.875rem;
+      width: 1.875rem;
       animation: bounceUpDown 2s infinite;
     }
   }
@@ -148,16 +148,16 @@ export default {
   }
 
   .twinkling-stars {
-    width: 10000px;
+    width: 625rem;
     height: 100%;
     position: absolute;
     right: 0;
-    left: -9000px;
+    left: 562.5rem;
     bottom: 0;
     background: transparent
       url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png")
       repeat;
-    background-size: 1000px 1000px;
+    background-size: 62.5rem 62.5rem;
     animation: stars 50s linear infinite;
   }
   &::after {
@@ -165,36 +165,36 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 10px;
+    height: 0.625rem;
     background: $gray-main-background;
     background-image: linear-gradient(
       to bottom,
       rgba(185, 185, 185, 0) 0% rgba(185, 185, 185, 1) 100%
     );
-    box-shadow: 0px 0px 15px 10px $gray-main-background,
-      0px 0px 15px 10px $gray-main-background;
+    box-shadow: 0 0 0.9375rem 0.625rem $gray-main-background,
+      0 0 0.9375rem 0.625rem $gray-main-background;
   }
 }
 
 @keyframes stars {
   from {
-    transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(1000px, 0px, 0px);
+    transform: translate3d(62.5rem, 0, 0);
   }
 }
 
 @keyframes bounceUpDown {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(10px);
+    transform: translateY(0.625rem);
   }
 
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 </style>

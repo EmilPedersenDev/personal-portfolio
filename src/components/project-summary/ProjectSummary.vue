@@ -52,7 +52,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (min-width: 1200px) {
+  @include rw-respond-above(l) {
     justify-content: space-between;
 
     .projects-wrapper {
@@ -72,27 +72,27 @@ export default {
   }
 
   .projects-wrapper {
-    padding-top: 20px;
+    padding-top: 1.25rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 13.75rem));
     width: 80%;
     justify-content: center;
     align-items: flex-end;
-    grid-gap: 10px;
+    grid-gap: 0.625rem;
     position: relative;
     .project-card {
-      height: 250px;
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-        rgba(0, 0, 0, 0.22) 0px 10px 10px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+      height: 15.625rem;
+      box-shadow: rgba(0, 0, 0, 0.25) 0 0.875rem 1.75rem,
+        rgba(0, 0, 0, 0.22) 0 0.625rem 0.625rem, rgba(0, 0, 0, 0.22) 0 0.625rem 0.625rem;
       transition: transform $animation-duration ease $animation-delay,
         opacity $animation-short-duration ease-in $animation-delay,
         visibility $animation-short-duration ease-in $animation-delay,
         background-size $animation-short-duration ease 0s;
-      border-radius: 5px;
+      border-radius: 0.3125rem;
       background-repeat: no-repeat;
-      background-position: center -10px;
+      background-position: center -0.625rem;
       background-size: 100% auto;
-      @media (min-width: 768px) {
+      @include rw-respond-above(m) {
         background-position: center center;
         background-size: auto 100%;
       }
@@ -103,10 +103,10 @@ export default {
         visibility: hidden;
       }
       &:nth-child(odd) {
-        transform: translateY(-200px);
+        transform: translateY(-12.5rem);
       }
       &:nth-child(even) {
-        transform: translateY(300px);
+        transform: translateY(18.75rem);
       }
 
       &.animate {
@@ -114,21 +114,21 @@ export default {
         &:nth-child(even) {
           opacity: 1;
           visibility: visible;
-          transform: translateY(0px);
+          transform: translateY(0);
         }
 
-        @media (min-width: 1200px) {
+        @include rw-respond-above(l) {
           &:nth-child(even) {
             opacity: 1;
-            transform: translateY(-30px);
+            transform: translateY(-1.875rem);
           }
         }
       }
       &:last-child {
         background-position: left center;
       }
-      @media (max-width: 576px) {
-        height: 100px;
+      @include rw-respond-below(s) {
+        height: 6.25rem;
       }
 
       &::before {
@@ -138,7 +138,7 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 5px;
+        border-radius: 0.3125rem;
         background: linear-gradient(to bottom, transparent 0%, black 80%);
       }
 
@@ -151,11 +151,11 @@ export default {
         width: 100%;
         text-align: center;
         font-weight: 700;
-        letter-spacing: 1.5px;
+        letter-spacing: 1.0.3125rem;
       }
 
       &:hover {
-        @media (min-width: 768px) {
+        @include rw-respond-above(m) {
           background-size: auto 120%;
         }
         cursor: pointer;
@@ -166,26 +166,26 @@ export default {
   .all-projects {
     display: flex;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 1.25rem;
     transition: transform $animation-duration ease $animation-delay,
       visibility $animation-short-duration ease-in $animation-delay,
       opacity $animation-short-duration ease-in $animation-delay;
-    transform: translateX(-400px);
+    transform: translateX(-25rem);
     opacity: 0;
     visibility: hidden;
     &.animate {
-      transform: translateX(0px);
+      transform: translateX(0);
       opacity: 1;
       visibility: visible;
     }
     h2 {
-      margin-right: 10px;
-      font-size: clamp(14px, 6vw, 32px);
+      margin-right: 0.625rem;
+      font-size: clamp(0.875rem, 6vw, 2rem);
       color: #000;
     }
     img {
-      height: 30px;
-      width: 30px;
+      height: 1.875rem;
+      width: 1.875rem;
       animation: bounceRight 2s infinite;
       animation-play-state: paused;
     }
@@ -201,14 +201,14 @@ export default {
 
 @keyframes bounceRight {
   0% {
-    transform: translateX(0px);
+    transform: translateX(0);
   }
   50% {
-    transform: translateX(10px);
+    transform: translateX(0.625rem);
   }
 
   100% {
-    transform: translateX(0px);
+    transform: translateX(0);
   }
 }
 </style>

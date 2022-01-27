@@ -45,18 +45,18 @@ export default {
   overflow: hidden;
   .resume-wrapper {
     transition: all $animation-duration ease $animation-delay;
-    transform: translateY(400px);
+    transform: translateY(25rem);
     opacity: 0;
     visibility: hidden;
     h1 {
-      letter-spacing: 3px;
+      letter-spacing: 0.1875rem;
       font-weight: 200;
-      font-size: 45px;
+      font-size: 2.8125rem;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 1.875rem;
     }
     &.--is-animating {
-      transform: translateY(0px);
+      transform: translateY(0);
       opacity: 1;
       visibility: visible;
     }

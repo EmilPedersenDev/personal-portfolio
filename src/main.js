@@ -10,8 +10,8 @@ import Vuelidate from "vuelidate";
 Vue.use(VueFullPage);
 Vue.use(Vuelidate);
 
-import "./components/index.js";
-import "./assets/styles/main.scss";
+import "./components/common/index.js";
+// import "./assets/styles/main.scss";
 
 Vue.config.productionTip = false;
 
