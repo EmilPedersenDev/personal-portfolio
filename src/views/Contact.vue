@@ -96,7 +96,7 @@ import {
 } from "vuelidate/lib/validators";
 import alphaLetterValidation from "../services/validations.js";
 import { mapMutations } from "vuex";
-import Success from "../components/success/Success.vue";
+import Success from "../components/common/success/Success.vue";
 import axios from "axios";
 
 export default {
@@ -181,8 +181,8 @@ export default {
 
 <style lang="scss" scoped>
 .contact {
+  @include fullHeightAndWidth;
   height: 100vh;
-  width: 100%;
   overflow: hidden;
   background-image: url("../assets/images/forest-creative-gray.jpg");
   background-repeat: no-repeat;
@@ -194,38 +194,38 @@ export default {
 
   form {
     width: 100%;
-    max-width: 400px;
+    max-width: 25rem;
     background-color: $black-background;
-    padding: 20px;
-    box-shadow: 0 5px 25px 5px rgba(0, 0, 0, 0.5);
+    padding: 1.25rem;
+    box-shadow: 0 0.3125rem 1.5625rem 0.3125rem rgba(0, 0, 0, 0.5);
     transition: all $animation-duration ease $animation-delay;
-    transform: translateY(400px);
+    transform: translateY(25rem);
     opacity: 0;
     visibility: hidden;
     h1,
     .e-input-group,
     .e-textarea-group,
     .e-button {
-      margin: 20px 0;
+      margin: 1.25rem 0;
     }
     h1 {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 2.1875rem;
     }
     .e-button {
-      margin: 20px auto;
+      margin: 1.25rem auto;
     }
     .required-definition {
-      font-size: 10px;
+      font-size: 0.625rem;
       float: right;
       span {
-        font-size: 14px;
+        font-size: 0.875rem;
         color: $pink;
       }
     }
 
     &.animate {
-      transform: translateY(0px);
+      transform: translateY(0);
       opacity: 1;
       visibility: visible;
     }
@@ -237,15 +237,15 @@ export default {
     justify-content: center;
     position: absolute;
     cursor: pointer;
-    @media (max-width: 768px) {
+    @include rw-respond-below(m) {
       left: 50%;
       bottom: 5%;
       right: auto;
       transform: translateX(-50%);
       background: $main-background;
       opacity: 0.9;
-      border-radius: 5px;
-      padding: 10px;
+      border-radius: 0.3125rem;
+      padding: 0.625rem;
       z-index: 100;
       img {
         display: none;
@@ -258,30 +258,30 @@ export default {
     right: 5%;
     bottom: 5%;
     img {
-      height: 20px;
-      width: 20px;
+      height: 1.25rem;
+      width: 1.25rem;
       flex-basis: 100%;
       transform: rotate(180deg);
       animation: bounceUpDown 2s infinite;
     }
     p {
-      margin-top: 12px;
-      font-size: 12px;
-      letter-spacing: 2px;
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.125rem;
     }
   }
 }
 
 @keyframes bounceUpDown {
   0% {
-    transform: translateY(0px) rotate(180deg);
+    transform: translateY(0) rotate(180deg);
   }
   50% {
-    transform: translateY(10px) rotate(180deg);
+    transform: translateY(0.625rem) rotate(180deg);
   }
 
   100% {
-    transform: translateY(0px) rotate(180deg);
+    transform: translateY(0) rotate(180deg);
   }
 }
 </style>

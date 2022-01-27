@@ -38,19 +38,19 @@ export default {
     font-family: sans-serif;
     font-weight: 800;
     position: relative;
-    font-size: 80px;
-    @media (min-width: 768px) {
-      font-size: 100px;
+    font-size: 5rem;
+    @include rw-respond-above(m) {
+      font-size: 6.25rem;
     }
-    padding: 0px;
+    padding: 0;
     transition: transform $animation-duration ease $animation-third-item-delay,
       opacity $animation-duration ease-in $animation-third-item-delay,
       visibility $animation-short-duration ease-in $animation-third-item-delay;
-    transform: translateY(400px);
+    transform: translateY(25rem);
     opacity: 0;
     visibility: hidden;
     &.animate {
-      transform: translateY(0px);
+      transform: translateY(0);
       opacity: 1;
       visibility: visible;
     }
@@ -58,7 +58,7 @@ export default {
 
   .glitch::before,
   .glitch::after {
-    padding: 0px;
+    padding: 0;
     color: white;
     content: attr(data-text);
     position: absolute;
@@ -70,8 +70,8 @@ export default {
   }
 
   .glitch::before {
-    left: 3px;
-    text-shadow: -2px 0 red;
+    left: 0.1875rem;
+    text-shadow: -0.125rem 0 red;
     animation-name: glitch-animation-1;
     animation-duration: 2s;
     animation-timing-function: linear;
@@ -81,8 +81,8 @@ export default {
   }
 
   .glitch::after {
-    left: -3px;
-    text-shadow: -2px 0 blue;
+    left: -0.1875rem;
+    text-shadow: -0.125rem 0 blue;
     animation-name: glitch-animation-2;
     animation-duration: 2s;
     animation-timing-function: linear;
@@ -96,7 +96,7 @@ export default {
   $steps: 20;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(150) + px, 350px, random(150) + px, 0px);
+      clip: rect(random(150) + px, 350px, random(150) + px, 0);
     }
   }
 }
@@ -105,7 +105,7 @@ export default {
   $steps: 20;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(150) + px, 350px, random(150) + px, 0px);
+      clip: rect(random(150) + px, 350px, random(150) + px, 0);
     }
   }
 }

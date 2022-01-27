@@ -65,36 +65,36 @@ export default {
       align-items: center;
       &.animate {
         span {
-          transform: translateX(0px);
+          transform: translateX(0);
         }
         h1 {
-          transform: translateX(0px);
+          transform: translateX(0);
         }
       }
 
       span {
-        width: 50px;
+        width: 3.125rem;
         background: #fff;
-        height: 1px;
+        height: 0.0625rem;
         transition: transform $animation-duration ease
           $animation-second-item-delay;
-        transform: translateX(-500px);
-        margin-right: 10px;
+        transform: translateX(-31.25rem);
+        margin-right: 0.625rem;
       }
       h1 {
-        font-size: 32px;
+        font-size: 2rem;
         position: relative;
         line-height: 1.5;
-        letter-spacing: 3px;
+        letter-spacing: 0.1875rem;
         font-weight: 200;
         transition: transform $animation-duration ease $animation-delay;
-        transform: translateX(-300px);
+        transform: translateX(-18.75rem);
       }
     }
 
     .about__text {
       position: absolute;
-      @media (min-width: 768px) {
+      @include rw-respond-above(m) {
         top: 40%;
         left: 60%;
         transform: translate(-60%, -40%);
@@ -107,18 +107,18 @@ export default {
       align-items: center;
       flex-direction: column;
       width: 80%;
-      max-width: 300px;
+      max-width: 18.75rem;
       text-align: center;
       p {
-        margin-top: 30px;
+        margin-top: 1.875rem;
         line-height: 1.5;
-        letter-spacing: 2px;
-        font-size: clamp(12px, 1vw, 16px);
+        letter-spacing: 0.125rem;
+        font-size: clamp(0.75rem, 1vw, 1rem);
         &:first-of-type {
           transition: transform $animation-duration ease $animation-delay,
             opacity $animation-duration ease-in $animation-delay,
             visibility $animation-short-duration ease-in $animation-delay;
-          transform: translateY(300px);
+          transform: translateY(18.75rem);
           opacity: 0;
           visibility: hidden;
         }
@@ -129,34 +129,34 @@ export default {
             opacity $animation-duration ease-in $animation-second-item-delay,
             visibility $animation-short-duration ease-in
               $animation-second-item-delay;
-          transform: translateY(300px);
+          transform: translateY(18.75rem);
           opacity: 0;
           visibility: hidden;
-          @media (max-width: 768px) {
-            margin-top: 10px;
+          @include rw-respond-below(m) {
+            margin-top: 0.625rem;
           }
         }
         &.animate {
-          transform: translateX(0px);
+          transform: translateX(0);
           opacity: 1;
           visibility: visible;
         }
       }
 
       img {
-        width: 100px;
-        height: 100px;
+        width: 6.25rem;
+        height: 6.25rem;
         border-radius: 50%;
       }
       .about__gengar {
         position: absolute;
         bottom: 50%;
         right: 50%;
-        width: 200px;
-        height: 200px;
+        width: 12.5rem;
+        height: 12.5rem;
         transform: translate(50%, 50%);
         opacity: 0.03;
-        @media (min-width: 768px) {
+        @include rw-respond-above(m) {
           bottom: -80%;
           right: -100%;
           transform: translate(-100%, -80%);
@@ -166,28 +166,28 @@ export default {
         position: absolute;
         top: -20%;
         left: -30%;
-        width: 300px;
-        height: 300px;
+        width: 18.75rem;
+        height: 18.75rem;
         transform: translate(-30%, -20%);
         opacity: 0.05;
         display: none;
-        @media (min-width: 768px) {
+        @include rw-respond-above(m) {
           display: inline;
         }
       }
     }
 
     .about__mountain {
-      width: 500px;
-      height: 200px;
+      width: 31.25rem;
+      height: 12.5rem;
       position: absolute;
       bottom: 0;
       background-image: url("../../assets/images/mountain.png");
-      background-position: -40px 52px;
+      background-position: -2.5rem 3.25rem;
       background-size: cover;
       background-repeat: no-repeat;
       opacity: 0.5;
-      @media (min-width: 768px) {
+      @include rw-respond-above(m) {
         opacity: 1;
       }
     }
@@ -198,15 +198,15 @@ export default {
       justify-content: center;
       position: absolute;
       cursor: pointer;
-      @media (max-width: 768px) {
+      @include rw-respond-below(m) {
         left: 50%;
         bottom: 5%;
         right: auto;
         transform: translateX(-50%);
         background: $main-background;
         opacity: 0.9;
-        border-radius: 5px;
-        padding: 10px;
+        border-radius: 0.3125rem;
+        padding: 0.625rem;
         z-index: 100;
         img {
           display: none;
@@ -219,30 +219,30 @@ export default {
       right: 5%;
       bottom: 5%;
       img {
-        height: 20px;
-        width: 20px;
+        height: 1.25rem;
+        width: 1.25rem;
         flex-basis: 100%;
         transform: rotate(180deg);
         animation: bounceUpDown 2s infinite;
       }
       p {
-        margin-top: 12px;
-        font-size: 12px;
-        letter-spacing: 2px;
+        margin-top: 0.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.125rem;
       }
     }
   }
 }
 @keyframes bounceUpDown {
   0% {
-    transform: translateY(0px) rotate(180deg);
+    transform: translateY(0) rotate(180deg);
   }
   50% {
-    transform: translateY(10px) rotate(180deg);
+    transform: translateY(0.625rem) rotate(180deg);
   }
 
   100% {
-    transform: translateY(0px) rotate(180deg);
+    transform: translateY(0) rotate(180deg);
   }
 }
 </style>

@@ -120,7 +120,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 1.875rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -129,7 +129,7 @@ export default {
     display: flex;
     justify-content: space-between;
     .navigation__logo {
-      width: 30px;
+      width: 1.875rem;
       height: auto;
       vertical-align: middle;
     }
@@ -137,13 +137,13 @@ export default {
   .navigation__right {
     z-index: 25;
     .navigation__icon-wrapper {
-      height: 80px;
-      width: 80px;
+      height: 5rem;
+      width: 5rem;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 12px;
-      @media (min-width: 768px) {
+      padding-right: 0.75rem;
+      @include rw-respond-above(m) {
         justify-content: center;
         padding: 0;
       }
@@ -154,25 +154,25 @@ export default {
 
       &.open {
         .navigation__hamburger {
-          transform: translateX(-50px);
+          transform: translateX(-3.125rem);
           background: transparent;
           box-shadow: none;
           &::before {
             background: #fff !important;
-            transform: rotate(45deg) translate(35px, -35px);
+            transform: rotate(45deg) translate(2.1875rem, -2.1875rem);
           }
           &::after {
             background: #fff !important;
-            transform: rotate(-45deg) translate(35px, 35px);
+            transform: rotate(-45deg) translate(2.1875rem, 2.1875rem);
           }
         }
       }
       .navigation__hamburger {
-        width: 20px;
-        height: 2px;
-        border-radius: 5px;
+        width: 1.25rem;
+        height: 0.125rem;
+        border-radius: 0.3125rem;
         background: #fff;
-        box-shadow: 0px 2px 5px rgba(255, 101, 47, 0.2);
+        box-shadow: 0 0.125rem 0.3125rem rgba(255, 101, 47, 0.2);
         transition: all 0.3s ease;
         &.isBlackNavbar {
           background: #000;
@@ -185,20 +185,20 @@ export default {
         &::after {
           content: "";
           position: absolute;
-          width: 30px;
-          height: 2px;
+          width: 1.875rem;
+          height: 0.125rem;
           background: #fff;
-          border-radius: 5px;
+          border-radius: 0.3125rem;
           transition: all 0.3s ease;
-          box-shadow: 0px 2px 5px rgba(255, 101, 47, 0.2);
+          box-shadow: 0 0.125rem 0.3125rem rgba(255, 101, 47, 0.2);
         }
 
         &::before {
-          transform: translateY(-12px);
+          transform: translateY(-0.75rem);
         }
 
         &::after {
-          transform: translateY(12px);
+          transform: translateY(0.75rem);
         }
       }
     }
@@ -230,7 +230,7 @@ export default {
             position: relative;
             text-decoration: none;
             color: #fff;
-            font-size: 42px;
+            font-size: 2.625rem;
             &::after {
               transition: all 0.3s ease-in-out;
               position: absolute;
@@ -238,15 +238,15 @@ export default {
               left: 0;
               content: "";
               background: #fff;
-              width: 0px;
-              height: 0px;
+              width: 0;
+              height: 0;
               opacity: 0;
             }
 
             &:hover {
               &::after {
                 opacity: 1;
-                height: 2px;
+                height: 0.125rem;
                 width: 100%;
               }
             }
@@ -257,11 +257,11 @@ export default {
         display: none;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 1.25rem;
 
         .fab {
           color: $white;
-          font-size: 30px;
+          font-size: 1.875rem;
           transition: all $animation-short-duration ease;
           &:hover {
             cursor: pointer;
@@ -273,7 +273,7 @@ export default {
             }
           }
           &.fa-linkedin {
-            margin-right: 20px;
+            margin-right: 1.25rem;
           }
         }
       }

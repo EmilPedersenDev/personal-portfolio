@@ -29,7 +29,7 @@
 
 <script>
 import allProjects from "../services/models/projects.js";
-import Observer from "../components/observer/Observer.vue";
+import Observer from "../components/common/observer/Observer.vue";
 import { mapMutations } from "vuex";
 
 export default {
@@ -83,29 +83,29 @@ export default {
   .showcase-projects {
     width: 100%;
     h1 {
-      margin: 0 auto 50px;
+      margin: 0 auto 3.125rem;
       width: 100%;
-      max-width: 600px;
+      max-width: 37.5rem;
       font-weight: 200;
-      letter-spacing: 3px;
+      letter-spacing: 0.1875rem;
     }
     .showcase-projects__card {
       position: relative;
       width: 100%;
-      @media (min-width: 768px) {
-        height: 200px;
+      @media (min-width: 37.5rem) {
+        height: 12.5rem;
       }
-      height: 250px;
+      height: 15.625rem;
 
-      max-width: 600px;
+      max-width: 37.5rem;
       background-color: #2d3436;
       background-image: linear-gradient(315deg, #2d3436 0%, #1f1f1f 74%);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
-        0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
-        0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
-      border-left: 5px solid #7232f2;
-      margin: 0 auto 25px;
-      padding: 0 0 0 10px;
+      box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.07), 0 0.125rem 0.25rem rgba(0, 0, 0, 0.07),
+        0 0.25rem 0.5rem rgba(0, 0, 0, 0.07), 0 0.5rem 1rem rgba(0, 0, 0, 0.07),
+        0 1rem 2rem rgba(0, 0, 0, 0.07), 0 2rem 4rem rgba(0, 0, 0, 0.07);
+      border-left: 0.3125rem solid #7232f2;
+      margin: 0 auto 1.5625rem;
+      padding: 0 0 0 0.625rem;
       overflow: hidden;
       &::after {
         animation: slideFromRight 1s ease;
@@ -142,7 +142,7 @@ export default {
           right: 4%;
           transform: translate(-4%, -8%);
           a {
-            font-size: 12px;
+            font-size: 0.75rem;
             position: relative;
             &::before {
               transition: all 0.3s ease-in-out;
@@ -151,15 +151,15 @@ export default {
               left: 0;
               content: "";
               background: #fff;
-              width: 0px;
-              height: 0px;
+              width: 0;
+              height: 0;
               opacity: 0;
             }
 
             &:hover {
               &::before {
                 opacity: 1;
-                height: 1px;
+                height: 0.0625rem;
                 width: 100%;
               }
             }
@@ -169,16 +169,16 @@ export default {
         h3 {
           flex: 1;
           font-weight: 900;
-          padding-top: 15px;
+          padding-top: 0.9375rem;
         }
         p {
           flex: 3;
           line-height: 1.5;
-          font-size: 13px;
+          font-size: 0.8125rem;
           width: 100%;
-          padding: 0px 15px;
-          @media (min-width: 768px) {
-            max-width: 300px;
+          padding: 0 0.9375rem;
+          @include rw-respond-above(m) {
+            max-width: 18.75rem;
           }
           position: absolute;
           top: 50%;
@@ -193,7 +193,7 @@ export default {
 
 @keyframes expand {
   0% {
-    transform: translateY(100px);
+    transform: translateY(6.25rem);
   }
 }
 @keyframes fadeIn {
