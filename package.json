@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "start": "node history-routes-server.js",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "axios": "^0.25.0",
