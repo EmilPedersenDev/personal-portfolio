@@ -4,7 +4,7 @@ const history = require('connect-history-api-fallback');
 const favicon = require('serve-favicon');
 const path = require('path');
 
-const Port = process.env.HISTORY_PORT || 3001;
+const Port = process.env.PORT || 3001;
 const app = express();
 app.use(
   history({
