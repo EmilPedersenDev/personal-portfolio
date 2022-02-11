@@ -16,5 +16,5 @@ app.use(favicon(path.join(__dirname, 'dist', 'favicon.ico')));
 app.use(serveStatic(path.join(__dirname, 'dist')));
 
 app.listen(Port, () => {
-  console.log(`History routes server running on port ${Port}.`);
+  console.log(`History routes server running on port ${Port}`);
 });
