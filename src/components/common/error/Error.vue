@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "",
+  name: '',
   props: {
     error: {
       type: Object,

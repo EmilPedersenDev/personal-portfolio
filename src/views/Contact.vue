@@ -1,7 +1,7 @@
 <template>
   <div class="contact">
     <form @submit.prevent="submit" :class="{ animate: isContactAnimating }">
-      <div class="contact-form-action" v-if="!isEmailSent">
+      <div class="contact-form-action" v-if="!isMessageSent">
         <h1>Contact</h1>
         <e-input
           type="text"
@@ -22,27 +22,6 @@
             class="input-error"
             v-if="$v.model.name.$dirty && !$v.model.name.alphaLetterValidation"
             >Name must be alphabetic.</span
-          >
-        </e-input>
-        <e-input
-          type="text"
-          placeholder="Email"
-          v-model="model.email"
-          required
-          @blur="$v.model.email.$touch"
-          :invalid="$v.model.email.$dirty && $v.model.email.$invalid"
-        >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.email.$dirty && !$v.model.email.required"
-            >Not a valid Email.</span
-          >
-          <span
-            slot="error"
-            class="input-error"
-            v-if="$v.model.email.$dirty && !$v.model.email.email"
-            >Not a valid Email.</span
           >
         </e-input>
         <e-textarea
@@ -82,36 +61,30 @@
         <e-error :error="error" v-if="Object.keys(error).length !== 0" />
         <span class="required-definition"><span>*</span> Required fields</span>
       </div>
-      <e-success v-show="isEmailSent" :isActive="isEmailSent" />
+      <e-success v-show="isMessageSent" :isActive="isMessageSent" />
     </form>
   </div>
 </template>
 
 <script>
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-} from "vuelidate/lib/validators";
-import alphaLetterValidation from "../services/validations.js";
-import { mapMutations } from "vuex";
-import Success from "../components/common/success/Success.vue";
-import axios from "axios";
+import { required, minLength, maxLength } from 'vuelidate/lib/validators';
+import alphaLetterValidation from '../services/validations.js';
+import { mapMutations } from 'vuex';
+import Success from '../components/common/success/Success.vue';
+import axios from 'axios';
 
 export default {
-  name: "e-contact",
+  name: 'e-contact',
   components: {
-    "e-success": Success,
+    'e-success': Success,
   },
   data() {
     return {
       model: {
-        name: "",
-        message: "",
-        email: "",
+        name: '',
+        message: '',
       },
-      isEmailSent: false,
+      isMessageSent: false,
       isLoading: false,
       error: {},
       isContactAnimating: false,
@@ -129,10 +102,6 @@ export default {
         required,
         alphaLetterValidation,
       },
-      email: {
-        required,
-        email,
-      },
       message: {
         required,
         minLength: minLength(10),
@@ -142,7 +111,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setBlackNavbar: "SET_BLACK_NAVBAR",
+      setBlackNavbar: 'SET_BLACK_NAVBAR',
     }),
     async submit() {
       try {
@@ -155,19 +124,20 @@ export default {
         this.isLoading = true;
 
         const { status } = await axios.post(
-          `${process.env.VUE_APP_API_URL}/mail`,
+          `${process.env.VUE_APP_API_URL}/message`,
           this.model
         );
 
         if (status !== 200) {
-          throw new Error("Could not send the email.");
+          throw new Error('Could not send the message.');
         }
 
-        this.isEmailSent = true;
+        this.isMessageSent = true;
         this.isLoading = false;
       } catch (err) {
         this.isLoading = false;
-        this.error = err.response.data;
+        const [error] = err.response.data.errors;
+        this.error = error;
       }
     },
   },
@@ -184,7 +154,7 @@ export default {
   @include fullHeightAndWidth;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../assets/images/forest-creative-gray.jpg");
+  background-image: url('../assets/images/forest-creative-gray.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
