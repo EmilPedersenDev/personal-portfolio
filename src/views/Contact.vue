@@ -136,8 +136,7 @@ export default {
         this.isLoading = false;
       } catch (err) {
         this.isLoading = false;
-        const [error] = err.response.data.errors;
-        this.error = error;
+        this.error = err.response.data;
       }
     },
   },

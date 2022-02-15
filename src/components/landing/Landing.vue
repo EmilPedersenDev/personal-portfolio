@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import Distortion from "../distortion/Distortion.vue";
+import Distortion from '../distortion/Distortion.vue';
 export default {
-  name: "e-landing",
+  name: 'e-landing',
   components: {
-    "e-distortion": Distortion,
+    'e-distortion': Distortion,
   },
   props: {
     goToPage: {
@@ -152,16 +152,15 @@ export default {
     height: 100%;
     position: absolute;
     right: 0;
-    left: 562.5rem;
     bottom: 0;
     background: transparent
-      url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png")
+      url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png')
       repeat;
     background-size: 62.5rem 62.5rem;
     animation: stars 50s linear infinite;
   }
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     width: 100%;
